@@ -399,7 +399,7 @@ FodyWeavers.xsd
 
 #eigen
 *.js
-*.lib
+#*.lib
 *.dll
 *.html
 *.svg 

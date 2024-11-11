@@ -40,6 +40,7 @@
 #include "tests/TestClearColor.h"
 #include "tests/TestTexture2D.h"
 #include "tests/TestCircle.h"
+#include "tests/TestParticles.h"
 
 int main(void)
 {
@@ -98,6 +99,7 @@ int main(void)
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
         testMenu->RegisterTest<test::TestCircle>("Circle");
+        testMenu->RegisterTest<test::TestParticles>("Particles");
 
         while (!glfwWindowShouldClose(window))
         {

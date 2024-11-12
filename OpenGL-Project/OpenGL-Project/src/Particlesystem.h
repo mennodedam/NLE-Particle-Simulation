@@ -39,22 +39,38 @@ public:
 	~ParticleSystem();
 
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r,	glm::vec4 color, unsigned int id);
-	void initSSBOs();
+	void DestroyParticle(unsigned int id);
+
+	void UploadParticleData();
 	void UpdateParticles (float deltaTime);
 	void RetrieveParticleData();
-	void DestroyParticle(unsigned int id);
-	bool LoadComputeShader(const std::string& filepath);
+	
+
+	void initSSBOs();
+	bool LoadComputeShader(const std::string& filePath);
+	bool LoadComputeShader2(const std::string& filePath);
+	GLuint LoadVertexShaderProgram(const std::string& filePath);
+	GLuint LoadFragmentShaderProgram(const std::string& filePath);
+	bool LoadVertexFragmentProgram(const std::string& vertexPath, const std::string& fragmentPath);
+
 	unsigned int GetParticleCount() const;
+
+	void RenderParticles();
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.	<-- NOG NIET KLAAR
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
 
 	GLuint m_ComputeShaderProgram;		///< Handle for the compute shader program used for particle updates.
-	GLuint m_SSBO;						///< Handle for SSBO
+	GLuint m_ShaderProgram;				///< Handle for shader program (Shader/Vertex)
+
+	GLuint m_SSBO;						///< Handle for Shader buffer storage object
+
 	GLuint m_PositionSSBO, m_VelocitySSBO, m_AccelerationSSBO;
 
 	std::vector<glm::vec3> m_PositionsGPU;
 	std::vector<glm::vec3> m_VelocitiesGPU;
 	std::vector<glm::vec3> m_AccelerationsGPU;
+
+	GLuint m_ComputeShaderProgram2; /// voor loadhsader 2
 };

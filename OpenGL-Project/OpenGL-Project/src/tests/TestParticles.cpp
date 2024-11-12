@@ -21,7 +21,10 @@ namespace test {
 
     TestParticles::TestParticles()
     {
-        m_Particlesystem.LoadComputeShader("res/shaders/ParticleUpdateCompute.shader");
+        std::cout << "Start Particle Test" << std::endl;
+        //m_Particlesystem.LoadComputeShader("res/shaders/BasicCompute.glsl");   ///< werkt
+        m_Particlesystem.LoadComputeShader2("res/shaders/BasicCompute.glsl");  ///< werkt 
+        m_Particlesystem.LoadVertexFragmentProgram("res/shaders/BasicVertex.glsl", "res/shaders/BasicFragment.glsl");
         m_Particlesystem.initSSBOs();
     }   
 
@@ -32,12 +35,14 @@ namespace test {
 
     void TestParticles::OnUpdate(float deltaTime)
     {
+        m_Particlesystem.UploadParticleData();
         m_Particlesystem.UpdateParticles(deltaTime);    ///< Implementatie later doen.
+        m_Particlesystem.RetrieveParticleData();
     }
 
     void TestParticles::OnRender()
     {
-
+        m_Particlesystem.RenderParticles(); ///< Render the particles using batch rendering.
     }
 
     void TestParticles::OnImGuiRender()
@@ -61,7 +66,7 @@ namespace test {
         {
             ImVec2 mousePos = ImGui::GetMousePos();
             //std::cout << "Mouse clicked at: (" << mousePos.x << "," << mousePos.y << ")" << std::endl;
-            ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);   ///< werkt nog niet.
+            //ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);   ///< werkt nog niet.
         }
 
     }

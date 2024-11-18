@@ -630,6 +630,11 @@
   <ItemGroup>
     <Image Include="res\textures\image.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3.lib" />
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3dll.lib" />
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3_mt.lib" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

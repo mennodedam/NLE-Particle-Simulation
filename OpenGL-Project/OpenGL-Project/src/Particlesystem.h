@@ -41,12 +41,11 @@ public:
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color, unsigned int id);
 	void DestroyParticle(unsigned int id);
 
+	void initSSBOs();
 	void UploadParticleData();
 	void UpdateParticles(float deltaTime);
 	void RetrieveParticleData();
 
-
-	void initSSBOs();
 	bool LoadComputeShader(const std::string& filePath);
 	bool LoadComputeShader2(const std::string& filePath);
 	GLuint LoadVertexShaderProgram(const std::string& filePath);

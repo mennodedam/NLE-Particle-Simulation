@@ -45,7 +45,8 @@ ParticleSystem::~ParticleSystem()
  * @param r The radius of the particle.
  * @param color The color of the particle (glm::vec4).
  */
-void ParticleSystem::CreateParticle(glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
+void ParticleSystem::CreateParticle(
+    glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
     glm::vec3 vel = { 0.0f, 0.0f, 0.0f },
     glm::vec3 acc = { 0.0f, 0.0f, 0.0f },
     float m = 1.0, float r = 1.0,
@@ -57,6 +58,9 @@ void ParticleSystem::CreateParticle(glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
     m_ParticleCount = GetParticleCount();
 }
 
+///< temp data
+std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };
+
 /**
  * @brief Initialize SSBO
  */
@@ -64,8 +68,6 @@ void ParticleSystem::initSSBOs()
 {
     GLCall(glGenBuffers(1, &m_SSBO));
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, m_Particles.size() * sizeof(Particle), nullptr, GL_DYNAMIC_DRAW));
-    GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO));
 }
 
 /**
@@ -73,9 +75,7 @@ void ParticleSystem::initSSBOs()
  */
 void ParticleSystem::UploadParticleData()
 {
-    GLCall(glGenBuffers(1, &m_SSBO));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, m_Particles.size() * sizeof(Particle), m_Particles.data(), GL_DYNAMIC_DRAW));
+    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, data.size() * sizeof(float), data.data(), GL_DYNAMIC_DRAW));
     GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO));
 }
 
@@ -87,9 +87,7 @@ void ParticleSystem::UploadParticleData()
 void ParticleSystem::UpdateParticles(float deltaTime)
 {
     GLCall(glUseProgram(m_ComputeShaderProgram2));
-    GLCall(glUniform1f(glGetUniformLocation(m_ComputeShaderProgram2, "deltaTime"), deltaTime));
-    GLuint numParticles = static_cast<GLuint>(GetParticleCount());
-    GLCall(glDispatchCompute((numParticles + 255) / 256, 1, 1)); // 256 work groups, maak dit later misschien member variable
+    GLCall(glDispatchCompute((data.size() + 63) / 64, 1, 1));
     GLCall(glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT));
 }
 
@@ -99,13 +97,11 @@ void ParticleSystem::UpdateParticles(float deltaTime)
 void ParticleSystem::RetrieveParticleData()
 {
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    void* mappedData = glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-
-    if (mappedData) 
-    {
-        std::memcpy(m_Particles.data(), mappedData, m_Particles.size() * sizeof(Particle));
-        GLCall(glUnmapBuffer(GL_SHADER_STORAGE_BUFFER));
-    }
+    float* mappedData = (float*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
+    glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+    std::vector<float> retrievedData(data.size());
+    std::memcpy(retrievedData.data(), mappedData, data.size() * sizeof(float));
+    glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 }
 
 /**
@@ -132,7 +128,8 @@ void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als 
 bool ParticleSystem::LoadComputeShader(const std::string& filePath)
 {
     std::ifstream shaderFile(filePath);
-    if (!shaderFile.is_open()) {
+    if (!shaderFile.is_open()) 
+    {
         std::cerr << "Failed to open compute shader file: " << filePath << std::endl;
         return false;
     }
@@ -288,7 +285,7 @@ bool ParticleSystem::LoadVertexFragmentProgram(const std::string& vertexPath, co
  */
 unsigned int ParticleSystem::GetParticleCount() const
 {
-    return m_Particles.size();
+    return m_Particles.size(); 
 }
 
 /**
@@ -296,5 +293,5 @@ unsigned int ParticleSystem::GetParticleCount() const
  */
 void ParticleSystem::RenderParticles()
 {
-
+    // Render logica --> maak gebruikt van batch rendering.
 }

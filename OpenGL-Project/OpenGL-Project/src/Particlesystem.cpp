@@ -17,8 +17,6 @@
 #include "Shader.h"
 #include "Renderer.h"
 
-#include "loadshader.h"
-
 /**
  * @brief Constructs a ParticleSystem instance with an initial particle count of zero.
  */
@@ -65,13 +63,6 @@ void ParticleSystem::initSSBOs()
 }
 
 /**
- * @brief Upload data from CPU to GPU
- */
-void ParticleSystem::UploadParticleData()
-{
-}
-
-/**
  * @brief Updates all particles in the particle system.
  *
  * @param particles A vector of particles to be updated using ComputeShader --> to be implemented later
@@ -83,7 +74,7 @@ void ParticleSystem::UpdateParticles(float deltaTime)
 }
 
 /**
- * @brief Retrieve particle data from GPU to CPU
+ * @brief Retrieve particle data
  */
 void ParticleSystem::RetrieveParticleData()
 {
@@ -104,11 +95,8 @@ void ParticleSystem::DestroyParticle(unsigned int id)
 		    m_Particles.end());
 }
 
-/**
- * @brief Load Computeshader
- */
-bool ParticleSystem::LoadComputeShader(const std::string& filePath) 
-{
+bool ParticleSystem::LoadComputeShader(const std::string& filePath) {
+    // Read shader source from file
     std::ifstream shaderFile(filePath);
     if (!shaderFile.is_open()) {
         std::cerr << "Failed to open compute shader file: " << filePath << std::endl;
@@ -119,10 +107,12 @@ bool ParticleSystem::LoadComputeShader(const std::string& filePath)
     std::string shaderCode = shaderStream.str();
     const char* shaderSource = shaderCode.c_str();
 
+    // Create and compile the compute shader
     GLuint shader = glCreateShader(GL_COMPUTE_SHADER);
     GLCall(glShaderSource(shader, 1, &shaderSource, nullptr));
     GLCall(glCompileShader(shader));
 
+    // Check for compile errors
     GLint success;
     GLCall(glGetShaderiv(shader, GL_COMPILE_STATUS, &success));
     if (!success) 
@@ -133,10 +123,12 @@ bool ParticleSystem::LoadComputeShader(const std::string& filePath)
         return false;
     }
 
+    // Link shader into a program
     m_ComputeShaderProgram = glCreateProgram();
     GLCall(glAttachShader(m_ComputeShaderProgram, shader));
     GLCall(glLinkProgram(m_ComputeShaderProgram));
 
+    // Check for linking errors
     GLCall(glGetProgramiv(m_ComputeShaderProgram, GL_LINK_STATUS, &success));
     if (!success) 
     {
@@ -146,115 +138,13 @@ bool ParticleSystem::LoadComputeShader(const std::string& filePath)
         return false;
     }
 
+    // Clean up the shader as it’s no longer needed after linking
     GLCall(glDeleteShader(shader));
 
     std::cout << "Compute shader loaded successfully from " << filePath << std::endl;
     return true;
 }
 
-/**
- * @brief Load ComputeShader2
- */
-bool ParticleSystem::LoadComputeShader2(const std::string& filePath)
-{
-    GLuint computeShader = LoadComputeShader(filePath.c_str());
-
-    if (computeShader == 0) 
-    {
-        std::cerr << "ERROR::PARTICLESYSTEM::COMPUTE_SHADER_NOT_LOADED\n";
-        return false;
-    }
-
-    GLuint computeProgram = glCreateProgram();
-    GLCall(glAttachShader(computeProgram, computeShader));
-    GLCall(glLinkProgram(computeProgram));
-
-    GLint success;
-    GLCall(glGetProgramiv(computeProgram, GL_LINK_STATUS, &success));
-    if (!success) 
-    {
-        char infoLog[512];
-        GLCall(glGetProgramInfoLog(computeProgram, 512, NULL, infoLog));
-        std::cerr << "ERROR::PARTICLESYSTEM::COMPUTE_SHADER_PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        GLCall(glDeleteShader(computeShader));
-        return false;
-    }
-
-    GLCall(glDeleteShader(computeShader));
-    this->m_ComputeShaderProgram2 = computeProgram;
-
-    return true;
-}
-
-/**
- * @brief Load VertexShader
- */
-GLuint ParticleSystem::LoadVertexShaderProgram(const std::string& filePath)
-{
-    GLuint vertexShader = LoadVertexShader(filePath.c_str());
-
-    if (vertexShader == 0) {
-        std::cerr << "ERROR::PARTICLESYSTEM::VERTEX_SHADER_NOT_LOADED\n";
-    }
-
-    std::cout << "Vertex shader loaded successfully from " << filePath << std::endl;
-
-    return vertexShader;
-}
-
-/**
- * @brief Load FragmentShader
- */
-GLuint ParticleSystem::LoadFragmentShaderProgram(const std::string& filePath)
-{
-    GLuint fragmentShader = LoadFragmentShader(filePath.c_str());
-
-    if (fragmentShader == 0) {
-        std::cerr << "ERROR::PARTICLESYSTEM::FRAGMENT_SHADER_NOT_LOADED\n";
-    }
-
-    std::cout << "Fragment shader loaded successfully from " << filePath << std::endl;
-
-    return fragmentShader;
-}
-
-bool ParticleSystem::LoadVertexFragmentProgram(const std::string& vertexPath, const std::string& fragmentPath)
-{
-    GLuint vertexShader = LoadVertexShaderProgram(vertexPath);
-    GLuint fragmentShader = LoadFragmentShaderProgram(fragmentPath);
-
-    if (vertexShader == 0 || fragmentShader == 0) {
-        std::cerr << "ERROR::PARTICLESYSTEM::VERTEX_OR_FRAGMENT_SHADER_NOT_LOADED\n";
-        return false;
-    }
-
-    GLuint shaderProgram = glCreateProgram();
-    GLCall(glAttachShader(shaderProgram, vertexShader));
-    GLCall(glAttachShader(shaderProgram, fragmentShader));
-    GLCall(glLinkProgram(shaderProgram));
-
-    GLint success;
-    GLCall(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
-    if (!success) 
-    {
-        char infoLog[512];
-        GLCall(glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog));
-        std::cerr << "ERROR::PARTICLESYSTEM::SHADER_PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        GLCall(glDeleteShader(vertexShader));
-        GLCall(glDeleteShader(fragmentShader));
-        return false;
-    }
-
-    GLCall(glDeleteShader(vertexShader));
-    GLCall(glDeleteShader(fragmentShader));
-
-    this->m_ShaderProgram = shaderProgram;
-
-    //std::cout << "Vertex/Fragment program shader linked successfully from " << vertexPath << " and " << fragmentPath << std::endl;
-    std::cout << "Vertex/Fragment program shaders linked successfully" << std::endl;
-
-    return true;
-}
 
 /**
  * @brief Retrieves the current count of particles in the particle system.
@@ -264,12 +154,4 @@ bool ParticleSystem::LoadVertexFragmentProgram(const std::string& vertexPath, co
 unsigned int ParticleSystem::GetParticleCount() const 
 { 
 	return m_Particles.size(); 
-}
-
-/**
- * @brief Render the Particles.
- */
-void ParticleSystem::RenderParticles()
-{
-
-}
+}	

@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\IndexBuffer.cpp" />
+    <ClCompile Include="src\loadshader.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Particlesystem.cpp" />
@@ -161,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\BasicCompute.glsl" />
+    <None Include="res\shaders\BasicFragment.glsl" />
+    <None Include="res\shaders\BasicVertex.glsl" />
     <None Include="res\shaders\Circle.shader" />
     <None Include="res\shaders\ParticleUpdateCompute.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
@@ -310,6 +314,7 @@
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h" />
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3native.h" />
     <ClInclude Include="src\IndexBuffer.h" />
+    <ClInclude Include="src\loadshader.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Particlesystem.h" />
     <ClInclude Include="src\Renderer.h" />

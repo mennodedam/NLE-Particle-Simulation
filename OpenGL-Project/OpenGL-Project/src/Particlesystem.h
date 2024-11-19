@@ -16,6 +16,7 @@
 #pragma once
 
 #include <vector>
+#include <stack>
 #include <algorithm>
 #include <iostream>
 #include <sstream>
@@ -56,20 +57,22 @@ public:
 
 	void RenderParticles();
 
+	void PrintIDlist();
+
 private:
-	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.	<-- NOG NIET KLAAR
+	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
 
 	GLuint m_ComputeShaderProgram;		///< Handle for the compute shader program used for particle updates.
+	GLuint m_ComputeShaderProgram2;		///< voor loadhsader 2
 	GLuint m_ShaderProgram;				///< Handle for shader program (Shader/Vertex)
-
 	GLuint m_SSBO;						///< Handle for Shader buffer storage object
 
-	GLuint m_PositionSSBO, m_VelocitySSBO, m_AccelerationSSBO;
+	//GLuint m_PositionSSBO, m_VelocitySSBO, m_AccelerationSSBO;
 
-	std::vector<glm::vec3> m_PositionsGPU;
-	std::vector<glm::vec3> m_VelocitiesGPU;
-	std::vector<glm::vec3> m_AccelerationsGPU;
+	//std::vector<glm::vec3> m_PositionsGPU;
+	//std::vector<glm::vec3> m_VelocitiesGPU;
+	//std::vector<glm::vec3> m_AccelerationsGPU;
 
-	GLuint m_ComputeShaderProgram2; /// voor loadhsader 2
+	std::vector<unsigned int> m_IDlist;	///< list van alle id's 
 };

@@ -7,48 +7,56 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 // temp values.
-glm::vec3 position = { 1.0f, 1.0f, 1.0f };
-glm::vec3 velocity = { 1.0f, 1.0f, 1.0f };
-glm::vec3 accelleration = { 1.0f, 1.0f, 1.0f };
+glm::vec3 position = { 1.0f, 1.0f, 0.0f };
+glm::vec3 velocity = { 1.0f, 1.0f, 0.0f };
+glm::vec3 accelleration = { 1.0f, 1.0f, 0.0f };
 glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
 
-float mass = 1.0;
-float radius = 1.0;
+float mass = 1.0f;
+float radius = 1.0f;
 
 int particleID = 0;
+
+ImVec2 mousePos;
 
 namespace test {
 
     TestParticles::TestParticles()
     {
-        m_Particlesystem.LoadComputeShader("res/shaders/ParticleUpdateCompute.shader");
+        std::cout << "Start Particle Test" << std::endl;
+        //m_Particlesystem.LoadComputeShader("res/shaders/BasicCompute.glsl");
+        m_Particlesystem.LoadComputeShader2("res/shaders/BasicCompute.glsl");
+        m_Particlesystem.LoadVertexFragmentProgram("res/shaders/BasicVertex.glsl", "res/shaders/BasicFragment.glsl");
         m_Particlesystem.initSSBOs();
-    }   
+    }
 
     TestParticles::~TestParticles()
     {
-
+        std::cout << "End Particle Test" << std::endl;
     }
 
     void TestParticles::OnUpdate(float deltaTime)
     {
-        m_Particlesystem.UpdateParticles(deltaTime);    ///< Implementatie later doen.
+        m_Particlesystem.UploadParticleData();
+        m_Particlesystem.UpdateParticles(deltaTime);    
+        m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
     }
 
     void TestParticles::OnRender()
     {
-
+        m_Particlesystem.RenderParticles(); ///< Render the particles using batch rendering.
     }
 
     void TestParticles::OnImGuiRender()
     {
         ImGui::Text("Particle count: %d", m_Particlesystem.GetParticleCount());
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
 
         if (ImGui::Button("Create Particle"))
         {
-            unsigned int count = m_Particlesystem.GetParticleCount();
-            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color, count+1);
+            ///< Toewijzen ID gaat fout indien particles worden verwijderd en daarna er nieuwe worden toegevoegd.
+            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color, m_Particlesystem.GetParticleCount() + 1); 
         }
 
         ImGui::InputInt("Particle ID", &particleID);
@@ -59,9 +67,7 @@ namespace test {
 
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
-            ImVec2 mousePos = ImGui::GetMousePos();
-            //std::cout << "Mouse clicked at: (" << mousePos.x << "," << mousePos.y << ")" << std::endl;
-            ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);   ///< werkt nog niet.
+            mousePos = ImGui::GetMousePos();
         }
 
     }

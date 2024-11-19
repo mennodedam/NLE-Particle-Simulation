@@ -60,9 +60,6 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\tests\TestClearColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,6 +79,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tests\TestParticles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loadshader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -503,6 +506,9 @@
     </None>
     <None Include="res\shaders\Circle.shader" />
     <None Include="res\shaders\ParticleUpdateCompute.shader" />
+    <None Include="res\shaders\BasicCompute.glsl" />
+    <None Include="res\shaders\BasicFragment.glsl" />
+    <None Include="res\shaders\BasicVertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -1459,10 +1465,18 @@
     <ClInclude Include="src\tests\TestParticles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\loadshader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\image.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3.lib" />
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3_mt.lib" />
+    <Library Include="deps\glfw-3.4.bin.WIN64\lib-vc2022\glfw3dll.lib" />
   </ItemGroup>
 </Project>

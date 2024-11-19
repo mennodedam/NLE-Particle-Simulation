@@ -23,7 +23,7 @@
   * @brief Constructs a ParticleSystem instance with an initial particle count of zero.
   */
 ParticleSystem::ParticleSystem()
-    :m_SSBO(0), m_PositionSSBO(0), m_VelocitySSBO(0), m_AccelerationSSBO(0), m_ComputeShaderProgram(0), m_ComputeShaderProgram2(0), m_ShaderProgram(0)
+    :m_SSBO(0), m_ComputeShaderProgram(0), m_ComputeShaderProgram2(0), m_ShaderProgram(0)//, m_PositionSSBO(0), m_VelocitySSBO(0), m_AccelerationSSBO(0),
 {
 }
 
@@ -53,10 +53,22 @@ void ParticleSystem::CreateParticle(
     glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f },
     unsigned int id = 0)
 {
+    if (std::find(m_IDlist.begin(), m_IDlist.end(), id) != m_IDlist.end())
+    {
+        unsigned int newID = id + 1;
+        while (std::find(m_IDlist.begin(), m_IDlist.end(), newID) != m_IDlist.end())
+        {
+            newID++;
+        }
+        id = newID;
+    }
+
     Particle particle(pos, vel, acc, m, r, color, id);
     m_Particles.emplace_back(pos, vel, acc, m, r, color, id);
     m_ParticleCount = GetParticleCount();
+    m_IDlist.push_back(id);
 }
+
 
 ///< temp data
 std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };
@@ -120,6 +132,8 @@ void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als 
     );
 
     m_ParticleCount = GetParticleCount();
+    m_IDlist.erase(std::remove(m_IDlist.begin(), m_IDlist.end(), id), m_IDlist.end());
+
 }
 
 /**
@@ -294,4 +308,15 @@ unsigned int ParticleSystem::GetParticleCount() const
 void ParticleSystem::RenderParticles()
 {
     // Render logica --> maak gebruikt van batch rendering.
+}
+
+/**
+ * @brief print list of id's to the console
+ */
+void ParticleSystem::PrintIDlist()
+{
+    std::cout << "Printing id list, size: " << m_IDlist.size() << std::endl;
+    for (int i = 0; i < m_IDlist.size(); i++)
+        std::cout << m_IDlist[i] << std::endl;
+    std::cout << "\n" << std::endl;
 }

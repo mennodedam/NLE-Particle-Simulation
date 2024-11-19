@@ -37,9 +37,9 @@ namespace test {
 
     void TestParticles::OnUpdate(float deltaTime)
     {
-        m_Particlesystem.UploadParticleData();
-        m_Particlesystem.UpdateParticles(deltaTime);    
-        m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
+        //m_Particlesystem.UploadParticleData();
+        //m_Particlesystem.UpdateParticles(deltaTime);    
+        //m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
     }
 
     void TestParticles::OnRender()
@@ -55,8 +55,7 @@ namespace test {
 
         if (ImGui::Button("Create Particle"))
         {
-            ///< Toewijzen ID gaat fout indien particles worden verwijderd en daarna er nieuwe worden toegevoegd.
-            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color, m_Particlesystem.GetParticleCount() + 1); 
+            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color, m_Particlesystem.GetParticleCount() + 1);
         }
 
         ImGui::InputInt("Particle ID", &particleID);
@@ -68,6 +67,11 @@ namespace test {
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             mousePos = ImGui::GetMousePos();
+        }
+
+        if (ImGui::Button("Print ID's"))
+        {
+            m_Particlesystem.PrintIDlist();
         }
 
     }

@@ -55,7 +55,8 @@ void ParticleSystem::CreateParticle(
 {
     if (std::find(m_IDlist.begin(), m_IDlist.end(), id) != m_IDlist.end())
     {
-        unsigned int newID = id + 1;
+        //unsigned int newID = id + 1;
+        unsigned int newID = 1;
         while (std::find(m_IDlist.begin(), m_IDlist.end(), newID) != m_IDlist.end())
         {
             newID++;
@@ -69,12 +70,49 @@ void ParticleSystem::CreateParticle(
     m_IDlist.push_back(id);
 }
 
+/**
+ * @brief Destroys a particle by its unique identifier.
+ *
+ * @param id The identifier of the particle to destroy.
+ * @note This function ensures the specified particle is deleted and removed from the system.
+ */
+void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als computeshader wordt gecalled.
+{
+    m_Particles.erase
+    (
+        std::remove_if(m_Particles.begin(), m_Particles.end(),
+            [id](const Particle& p) { return p.getID() == id; }),
+        m_Particles.end()
+    );
 
-///< temp data
-std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };
+    m_ParticleCount = GetParticleCount();
+    m_IDlist.erase(std::remove(m_IDlist.begin(), m_IDlist.end(), id), m_IDlist.end());
+
+}
 
 /**
- * @brief Initialize SSBO
+ * @brief print list of id's to the console
+ */
+void ParticleSystem::PrintIDlist()
+{
+    std::cout << "Printing id list, size: " << m_IDlist.size() << std::endl;
+    for (int i = 0; i < m_IDlist.size(); i++)
+        std::cout << m_IDlist[i] << std::endl;
+    std::cout << "\n" << std::endl;
+}
+
+/**
+ * @brief Retrieves the current count of particles in the particle system.
+ *
+ * @return The number of particles in the system.
+ */
+unsigned int ParticleSystem::GetParticleCount() const
+{
+    return m_Particles.size();
+}
+
+/**
+ * @brief Initialize Shader Storage Buffer Object (SSBO)
  */
 void ParticleSystem::initSSBOs()
 {
@@ -87,7 +125,7 @@ void ParticleSystem::initSSBOs()
  */
 void ParticleSystem::UploadParticleData()
 {
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, data.size() * sizeof(float), data.data(), GL_DYNAMIC_DRAW));
+    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, m_Particles.size() * sizeof(Particle), m_Particles.data(), GL_DYNAMIC_DRAW));
     GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO));
 }
 
@@ -99,7 +137,8 @@ void ParticleSystem::UploadParticleData()
 void ParticleSystem::UpdateParticles(float deltaTime)
 {
     GLCall(glUseProgram(m_ComputeShaderProgram2));
-    GLCall(glDispatchCompute((data.size() + 63) / 64, 1, 1));
+    GLCall(glDispatchCompute((m_Particles.size() + 63) / 64, 1, 1));
+    GLCall(glUniform1f(glGetUniformLocation(m_ComputeShaderProgram2, "deltaTime"), deltaTime));
     GLCall(glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT));
 }
 
@@ -109,31 +148,16 @@ void ParticleSystem::UpdateParticles(float deltaTime)
 void ParticleSystem::RetrieveParticleData()
 {
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    float* mappedData = (float*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-    glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
-    std::vector<float> retrievedData(data.size());
-    std::memcpy(retrievedData.data(), mappedData, data.size() * sizeof(float));
-    glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
-}
+    Particle* mappedData = (Particle*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
+    if (mappedData == nullptr) 
+    {
+        std::cerr << "Error: Failed to map SSBO buffer." << std::endl;
+        return;
+    }
 
-/**
- * @brief Destroys a particle by its unique identifier.
- *
- * @param id The identifier of the particle to destroy.
- * @note This function ensures the specified particle is deleted and removed from the system.
- */
-void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als computeshader wordt gecalled.
-{
-    m_Particles.erase
-    (
-        std::remove_if(m_Particles.begin(), m_Particles.end(),
-        [id](const Particle& p) { return p.getID() == id; }),
-        m_Particles.end()
-    );
-
-    m_ParticleCount = GetParticleCount();
-    m_IDlist.erase(std::remove(m_IDlist.begin(), m_IDlist.end(), id), m_IDlist.end());
-
+    std::memcpy(m_Particles.data(), mappedData, m_Particles.size() * sizeof(Particle));
+    GLCall(glUnmapBuffer(GL_SHADER_STORAGE_BUFFER));
+    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
 }
 
 /**
@@ -293,30 +317,9 @@ bool ParticleSystem::LoadVertexFragmentProgram(const std::string& vertexPath, co
 }
 
 /**
- * @brief Retrieves the current count of particles in the particle system.
- *
- * @return The number of particles in the system.
- */
-unsigned int ParticleSystem::GetParticleCount() const
-{
-    return m_Particles.size(); 
-}
-
-/**
  * @brief Render the Particles.
  */
 void ParticleSystem::RenderParticles()
 {
     // Render logica --> maak gebruikt van batch rendering.
-}
-
-/**
- * @brief print list of id's to the console
- */
-void ParticleSystem::PrintIDlist()
-{
-    std::cout << "Printing id list, size: " << m_IDlist.size() << std::endl;
-    for (int i = 0; i < m_IDlist.size(); i++)
-        std::cout << m_IDlist[i] << std::endl;
-    std::cout << "\n" << std::endl;
 }

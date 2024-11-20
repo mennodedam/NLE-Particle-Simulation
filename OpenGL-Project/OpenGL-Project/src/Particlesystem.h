@@ -41,6 +41,8 @@ public:
 
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color, unsigned int id);
 	void DestroyParticle(unsigned int id);
+	void PrintIDlist();
+	unsigned int GetParticleCount() const;
 
 	void initSSBOs();
 	void UploadParticleData();
@@ -53,11 +55,7 @@ public:
 	GLuint LoadFragmentShaderProgram(const std::string& filePath);
 	bool LoadVertexFragmentProgram(const std::string& vertexPath, const std::string& fragmentPath);
 
-	unsigned int GetParticleCount() const;
-
 	void RenderParticles();
-
-	void PrintIDlist();
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.

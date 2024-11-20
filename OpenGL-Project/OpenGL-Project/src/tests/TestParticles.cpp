@@ -37,9 +37,9 @@ namespace test {
 
     void TestParticles::OnUpdate(float deltaTime)
     {
-        //m_Particlesystem.UploadParticleData();
-        //m_Particlesystem.UpdateParticles(deltaTime);    
-        //m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
+        m_Particlesystem.UploadParticleData();
+        m_Particlesystem.UpdateParticles(deltaTime);    
+        m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
     }
 
     void TestParticles::OnRender()

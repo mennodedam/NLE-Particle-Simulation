@@ -163,6 +163,7 @@
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
     <None Include="res\shaders\BasicCompute.glsl" />
+    <None Include="res\shaders\BasicComputeWerkend.glsl" />
     <None Include="res\shaders\BasicFragment.glsl" />
     <None Include="res\shaders\BasicVertex.glsl" />
     <None Include="res\shaders\Circle.shader" />

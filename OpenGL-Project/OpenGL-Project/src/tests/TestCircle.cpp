@@ -58,7 +58,7 @@ namespace test {
         m_VAO->AddBuffer(*m_VertexBuffer, layout);
         m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 3 * NUMBER);
 
-        m_Shader = std::make_unique<Shader>("res/shaders/Circle.shader");
+        m_Shader = std::make_unique<Shader>("res/shaders/Circle.shader", "renderer");
         m_Shader->Bind();
 
         m_Shader->SetUniform4f("u_Color", m_CircleColor[0], m_CircleColor[1], m_CircleColor[2], m_CircleColor[3]);

@@ -24,10 +24,10 @@ namespace test {
     TestParticles::TestParticles()
     {
         std::cout << "Start Particle Test" << std::endl;
-        //m_Particlesystem.LoadComputeShader("res/shaders/BasicCompute.glsl");
-        m_Particlesystem.LoadComputeShader2("res/shaders/BasicCompute.glsl");
-        m_Particlesystem.LoadVertexFragmentProgram("res/shaders/BasicVertex.glsl", "res/shaders/BasicFragment.glsl");
-        m_Particlesystem.initSSBOs();
+
+        m_Shader        = std::make_unique<Shader>("res/shaders/Circle.shader", "renderer");
+        m_ComputeShader = std::make_unique<Shader>("res/shaders/BasicComputeWerkend.glsl", "compute");
+
     }
 
     TestParticles::~TestParticles()
@@ -37,9 +37,7 @@ namespace test {
 
     void TestParticles::OnUpdate(float deltaTime)
     {
-        m_Particlesystem.UploadParticleData();
-        m_Particlesystem.UpdateParticles(deltaTime);    
-        m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
+
     }
 
     void TestParticles::OnRender()

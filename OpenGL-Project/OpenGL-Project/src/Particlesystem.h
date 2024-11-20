@@ -49,12 +49,6 @@ public:
 	void UpdateParticles(float deltaTime);
 	void RetrieveParticleData();
 
-	bool LoadComputeShader(const std::string& filePath);
-	bool LoadComputeShader2(const std::string& filePath);
-	GLuint LoadVertexShaderProgram(const std::string& filePath);
-	GLuint LoadFragmentShaderProgram(const std::string& filePath);
-	bool LoadVertexFragmentProgram(const std::string& vertexPath, const std::string& fragmentPath);
-
 	void RenderParticles();
 
 private:

@@ -7,11 +7,23 @@
 
 #include "Renderer.h"
 
-Shader::Shader(const std::string& filepath)
+Shader::Shader(const std::string& filepath, const std::string& shadertype)
 	: m_Filepath(filepath), m_RendererID(0)
 {   
-    ShaderProgramSource source = ParseShader(filepath);
-    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    if (shadertype == "renderer")
+    {
+        ShaderProgramSource source = ParseShader(filepath);
+        m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    }
+    else if (shadertype == "compute")
+    {
+        m_RendererID = CreateShaderCompute(filepath);
+    }
+    else
+    {
+        std::cout << "Error: unknown shadertype!" << std::endl;
+    }
+    
 }
 
 Shader::~Shader()
@@ -93,6 +105,67 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
     glDeleteShader(fs);
 
     return program;
+}
+
+unsigned int Shader::CompileShaderCompute(const std::string& filepath)
+{
+    GLuint id = glCreateShader(GL_COMPUTE_SHADER);
+    std::string shadercode = ReadShaderFile(filepath);
+    const char* src = shadercode.c_str();
+    glShaderSource(id, 1, &src, nullptr);
+    glCompileShader(id);
+
+    int result;
+    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+    if (result == GL_FALSE)
+    {
+        int length;
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+        char* message = (char*)malloc(length * sizeof(char));
+        if (message == NULL) { std::cout << "Memory allocation failed" << std::endl; }
+        glGetShaderInfoLog(id, length, &length, message);
+        std::cout << "Failed to compile" << "Compute Shader!" << std::endl;
+        std::cout << message << std::endl;
+        glDeleteShader(id);
+        free(message);
+        return 0;
+    }
+
+    return id;
+}
+
+unsigned int Shader::CreateShaderCompute(const std::string& computeshader)
+{
+    unsigned int program = glCreateProgram();
+    unsigned int cs = CompileShaderCompute(computeshader);
+
+    glAttachShader(program, cs);
+    glLinkProgram(program);
+    glValidateProgram(program);
+
+    glDeleteShader(cs);
+
+    return program;
+}
+
+std::string Shader::ReadShaderFile(const std::string& filepath)
+{
+    std::ifstream shaderFile;
+    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try
+    {
+        shaderFile.open(filepath);
+        std::stringstream shaderStream;
+        shaderStream << shaderFile.rdbuf();
+        shaderFile.close();
+        return shaderStream.str();
+    }
+    catch (std::ifstream::failure& e)
+    {
+        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
+        return "";
+    }
 }
 
 void Shader::Bind() const

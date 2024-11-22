@@ -25,7 +25,6 @@
 #include "vendor/glm/glm.hpp"
 
 #include "Particle.h"
-#include "Shader.h"
 
  /**
   * @class ParticleSystem
@@ -39,32 +38,18 @@ public:
 	ParticleSystem();
 	~ParticleSystem();
 
+	size_t size() const { return m_Particles.size(); }
+	Particle* data() { return m_Particles.data(); }  
+	const Particle* data() const { return m_Particles.data(); }
+
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color, unsigned int id);
 	void DestroyParticle(unsigned int id);
 	void PrintIDlist();
 	unsigned int GetParticleCount() const;
 
-	void initSSBOs();
-	void UploadParticleData();
-	void UpdateParticles(float deltaTime);
-	void RetrieveParticleData();
-
-	void RenderParticles();
-
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
-
-	GLuint m_ComputeShaderProgram;		///< Handle for the compute shader program used for particle updates.
-	GLuint m_ComputeShaderProgram2;		///< voor loadhsader 2
-	GLuint m_ShaderProgram;				///< Handle for shader program (Shader/Vertex)
-	GLuint m_SSBO;						///< Handle for Shader buffer storage object
-
-	//GLuint m_PositionSSBO, m_VelocitySSBO, m_AccelerationSSBO;
-
-	//std::vector<glm::vec3> m_PositionsGPU;
-	//std::vector<glm::vec3> m_VelocitiesGPU;
-	//std::vector<glm::vec3> m_AccelerationsGPU;
 
 	std::vector<unsigned int> m_IDlist;	///< list van alle id's 
 };

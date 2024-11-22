@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GLmacros.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
     <ClCompile Include="src\loadshader.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="deps\glew-2.1.0-win32\glew-2.1.0\include\GL\wglew.h" />
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h" />
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3native.h" />
+    <ClInclude Include="src\GLmacros.h" />
     <ClInclude Include="src\IndexBuffer.h" />
     <ClInclude Include="src\loadshader.h" />
     <ClInclude Include="src\Particle.h" />

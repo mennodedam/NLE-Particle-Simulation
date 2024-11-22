@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "vendor/glm/glm.hpp" 
-#include "Renderer.h"
 
 class Particle
 {

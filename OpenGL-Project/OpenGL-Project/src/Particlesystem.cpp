@@ -17,13 +17,10 @@
 #include "Shader.h"
 #include "Renderer.h"
 
-#include "loadshader.h"
-
  /**
   * @brief Constructs a ParticleSystem instance with an initial particle count of zero.
   */
 ParticleSystem::ParticleSystem()
-    :m_SSBO(0), m_ComputeShaderProgram(0), m_ComputeShaderProgram2(0), m_ShaderProgram(0)//, m_PositionSSBO(0), m_VelocitySSBO(0), m_AccelerationSSBO(0),
 {
 }
 
@@ -111,59 +108,3 @@ unsigned int ParticleSystem::GetParticleCount() const
     return m_Particles.size();
 }
 
-/**
- * @brief Initialize Shader Storage Buffer Object (SSBO)
- */
-void ParticleSystem::initSSBOs()
-{
-    GLCall(glGenBuffers(1, &m_SSBO));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-}
-
-/**
- * @brief Upload data from CPU to GPU
- */
-void ParticleSystem::UploadParticleData()
-{
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, m_Particles.size() * sizeof(Particle), m_Particles.data(), GL_DYNAMIC_DRAW));
-    GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO));
-}
-
-/**
- * @brief Updates all particles in the particle system.
- *
- * @param particles A vector of particles to be updated using ComputeShader --> to be implemented later
- */
-void ParticleSystem::UpdateParticles(float deltaTime)
-{
-    GLCall(glUseProgram(m_ComputeShaderProgram2));
-    GLCall(glDispatchCompute((m_Particles.size() + 63) / 64, 1, 1));
-    GLCall(glUniform1f(glGetUniformLocation(m_ComputeShaderProgram2, "deltaTime"), deltaTime));
-    GLCall(glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT));
-}
-
-/**
- * @brief Retrieve particle data from GPU to CPU
- */
-void ParticleSystem::RetrieveParticleData()
-{
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    Particle* mappedData = (Particle*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-    if (mappedData == nullptr) 
-    {
-        std::cerr << "Error: Failed to map SSBO buffer." << std::endl;
-        return;
-    }
-
-    std::memcpy(m_Particles.data(), mappedData, m_Particles.size() * sizeof(Particle));
-    GLCall(glUnmapBuffer(GL_SHADER_STORAGE_BUFFER));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
-}
-
-/**
- * @brief Render the Particles.
- */
-void ParticleSystem::RenderParticles()
-{
-    // Render logica --> maak gebruikt van batch rendering.
-}

@@ -29,6 +29,8 @@ namespace test {
         m_ComputeShader = std::make_unique<Shader>("res/shaders/BasicCompute.glsl", "compute");
 
         m_ComputeShader->initSSBO();
+
+        std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
     }
 
     TestParticles::~TestParticles()

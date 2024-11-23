@@ -47,24 +47,20 @@ void ParticleSystem::CreateParticle(
     glm::vec3 vel = { 0.0f, 0.0f, 0.0f },
     glm::vec3 acc = { 0.0f, 0.0f, 0.0f },
     float m = 1.0, float r = 1.0,
-    glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f },
-    unsigned int id = 0)
+    glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f })
 {
-    if (std::find(m_IDlist.begin(), m_IDlist.end(), id) != m_IDlist.end())
+    if (!m_Freelist.empty())
     {
-        //unsigned int newID = id + 1;
-        unsigned int newID = 1;
-        while (std::find(m_IDlist.begin(), m_IDlist.end(), newID) != m_IDlist.end())
-        {
-            newID++;
-        }
-        id = newID;
+        size_t freeIndex = m_Freelist.top();
+        m_Freelist.pop();
+        m_Particles.emplace_back(pos, vel, acc, m, r, color, freeIndex);
+        m_IDlist.push_back(freeIndex);
+        m_ParticleCount = GetParticleCount();
     }
-
-    Particle particle(pos, vel, acc, m, r, color, id);
-    m_Particles.emplace_back(pos, vel, acc, m, r, color, id);
-    m_ParticleCount = GetParticleCount();
-    m_IDlist.push_back(id);
+    else
+    {
+        std::cerr << "No free slots available for new particles!" << std::endl;
+    }
 }
 
 /**
@@ -75,6 +71,8 @@ void ParticleSystem::CreateParticle(
  */
 void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als computeshader wordt gecalled.
 {
+    m_Freelist.push(id);
+
     m_Particles.erase
     (
         std::remove_if(m_Particles.begin(), m_Particles.end(),
@@ -82,9 +80,9 @@ void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als 
         m_Particles.end()
     );
 
+    m_Particles.shrink_to_fit();
     m_ParticleCount = GetParticleCount();
     m_IDlist.erase(std::remove(m_IDlist.begin(), m_IDlist.end(), id), m_IDlist.end());
-
 }
 
 /**

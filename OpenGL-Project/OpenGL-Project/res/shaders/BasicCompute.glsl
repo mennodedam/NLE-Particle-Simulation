@@ -1,4 +1,4 @@
-#version 430
+#version 430 core
 
 struct Particle
 {
@@ -9,19 +9,15 @@ struct Particle
 
     vec3 pos;          // Matches m_Position
     float _padding2;   // vec3 alignment padding
-
     vec3 vel;          // Matches m_Velocity
-    float _padding3;   // vec3 alignment padding
-
+    float _padding3;   // vec3 alignment paddin
     vec3 acc;          // Matches m_Acceleration
     float _padding4;   // vec3 alignment padding
 
     vec3 p_pos;        // Matches m_PastPosition
     float _padding5;   // vec3 alignment padding
-
     vec3 p_vel;        // Matches m_PastVelocity
     float _padding6;   // vec3 alignment padding
-
     vec3 p_acc;        // Matches m_PastAcceleration
     float _padding7;   // vec3 alignment padding
 
@@ -30,7 +26,8 @@ struct Particle
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
-layout(std430, binding = 0) buffer DataBuffer {
+layout(std430, binding = 0) buffer DataBuffer 
+{
     Particle particles[];
 };
 

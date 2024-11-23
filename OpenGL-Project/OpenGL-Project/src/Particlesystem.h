@@ -26,6 +26,8 @@
 
 #include "Particle.h"
 
+#include <stack>
+
  /**
   * @class ParticleSystem
   * @brief Manages a system of particles, including creation, updating, and destruction.
@@ -42,14 +44,20 @@ public:
 	Particle* data() { return m_Particles.data(); }  
 	const Particle* data() const { return m_Particles.data(); }
 
-	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color, unsigned int id);
+	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
 	void DestroyParticle(unsigned int id);
 	void PrintIDlist();
 	unsigned int GetParticleCount() const;
+
+	void InitFreelist() { for (int i = m_MaxParticles - 1; i < m_MaxParticles; --i) { m_Freelist.push(i); } }
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
 
 	std::vector<unsigned int> m_IDlist;	///< list van alle id's 
+
+	const size_t m_MaxParticles = 100000;
+	std::stack<size_t> m_Freelist;
+
 };

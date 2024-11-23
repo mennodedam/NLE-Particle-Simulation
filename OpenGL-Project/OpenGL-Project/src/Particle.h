@@ -18,25 +18,25 @@ private:
 
     float m_Radius;            
     float m_Mass;              
-    float padding1;            
+    float padding1 = 0.0f;//float padding1;            
 
     glm::vec3 m_Position;      
-    float padding2;            
+    float padding2 = 0.0f;//float padding2;            
 
     glm::vec3 m_Velocity;      
-    float padding3;            
+    float padding3 = 0.0f;//float padding3;
 
     glm::vec3 m_Acceleration;  
-    float padding4;            
+    float padding4 = 0.0f;//float padding4;            
 
     glm::vec3 m_PastPosition;  
-    float padding5;            
+    float padding5 = 0.0f;//float padding5;            
 
     glm::vec3 m_PastVelocity;  
-    float padding6;            
+    float padding6 = 0.0f;//float padding6;            
 
     glm::vec3 m_PastAcceleration; 
-    float padding7;               
+    float padding7 = 0.0f;// float padding7;               
 
     glm::vec4 m_ParticleColor;
 };

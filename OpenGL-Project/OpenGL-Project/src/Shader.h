@@ -2,6 +2,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <stack>
 
 #include <GL/glew.h>
 #include "glm/glm.hpp" 

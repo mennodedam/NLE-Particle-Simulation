@@ -513,6 +513,7 @@
     <None Include="res\shaders\BasicFragment.glsl" />
     <None Include="res\shaders\BasicVertex.glsl" />
     <None Include="res\shaders\BasicComputeWerkend.glsl" />
+    <None Include="res\shaders\BasicParticle.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">

@@ -23,7 +23,9 @@ namespace test {
 
 		void OnUpdate(float delatTime) override;
 		void OnRender() override;
-		void OnImGuiRender() override;	 
+		void OnImGuiRender() override;	
+
+		float m_TimeElapsed;
 	private:
 		std::unique_ptr<VertexArray> m_VAO;
 		std::unique_ptr<VertexBuffer> m_VertexBuffer;
@@ -32,6 +34,7 @@ namespace test {
 		std::unique_ptr<Shader> m_ComputeShader;
 
 		ParticleSystem m_Particlesystem;
+  
 	};
 
 }

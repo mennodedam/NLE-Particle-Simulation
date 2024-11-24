@@ -25,11 +25,11 @@ namespace test {
     {
         std::cout << "Start Particle Test" << std::endl;
 
-        m_Shader        = std::make_unique<Shader>("res/shaders/BasicParticle.shader", "renderer");         ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
-        m_ComputeShader = std::make_unique<ComputeShader>("res/shaders/BasicCompute.glsl");
+        m_Shader        = std::make_unique<Shader>("res/shaders/ParticleShaders/Vertex.glsl", "res/shaders/ParticleShaders/Fragment.glsl"); ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+        m_ComputeShader = std::make_unique<ComputeShader>("res/shaders/ParticleShaders/Compute.glsl");
 
         m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());
-        m_ComputeShader->initActiveIDlist(m_Particlesystem.GetMaxNumber());
+        m_ComputeShader->initSSBOActiveIDlist(m_Particlesystem.GetMaxNumber());
 
         std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
         std::cout << "Maximum amount of particles: " << m_Particlesystem.GetMaxNumber() << std::endl;
@@ -76,6 +76,7 @@ namespace test {
             m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color);
             m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
             //m_ComputeShader->UploadAddElement(m_Particlesystem, newParticle, freeindex);
+            //m_ComputeShader->UploadIDlist(m_Particlesystem.IDlistData());     
         }
 
         ImGui::InputInt("Particle ID", &particleID);

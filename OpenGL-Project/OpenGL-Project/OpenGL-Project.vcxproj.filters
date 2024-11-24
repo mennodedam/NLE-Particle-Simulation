@@ -81,9 +81,6 @@
     <ClCompile Include="src\tests\TestParticles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\loadshader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -95,7 +92,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Old shaders\Basic.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -510,13 +507,15 @@
     <None Include="src\vendor\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="res\shaders\Circle.shader" />
-    <None Include="res\shaders\ParticleUpdateCompute.shader" />
-    <None Include="res\shaders\BasicCompute.glsl" />
-    <None Include="res\shaders\BasicFragment.glsl" />
-    <None Include="res\shaders\BasicVertex.glsl" />
-    <None Include="res\shaders\BasicComputeWerkend.glsl" />
-    <None Include="res\shaders\BasicParticle.shader" />
+    <None Include="res\shaders\Old shaders\Circle.shader" />
+    <None Include="res\shaders\ParticleShaders\Compute.glsl" />
+    <None Include="res\shaders\Old shaders\BasicParticle.shader" />
+    <None Include="res\shaders\Circle\Fragment.glsl" />
+    <None Include="res\shaders\Circle\Vertex.glsl" />
+    <None Include="res\shaders\ParticleShaders\Vertex.glsl" />
+    <None Include="res\shaders\ParticleShaders\Fragment.glsl" />
+    <None Include="res\shaders\Texture\Fragment.glsl" />
+    <None Include="res\shaders\Texture\Vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -1471,9 +1470,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tests\TestParticles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\loadshader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GLmacros.h">

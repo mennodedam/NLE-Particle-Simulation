@@ -28,9 +28,9 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	void initSSBO(unsigned int maxSize);
-	void initActiveIDlist(unsigned int maxSize);
-	void UpdateIDlist(const std::vector<unsigned int>& idlist);
+	void initSSBO(unsigned int size);
+	void initSSBOActiveIDlist(unsigned int size);
+	void UploadIDlist(const std::vector<unsigned int>& idlist);
 	void UploadData(ParticleSystem& particlesystem);
 	void UploadAddElement(ParticleSystem& particlesystem, Particle& newParticle, unsigned int position);
 	void Update(ParticleSystem& particlesystem, float deltaTime);
@@ -42,9 +42,9 @@ public:
 	void SetUniform4f(const std::string& name, float v0, float v1, float f2, float f3);
 	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
 private:
+	std::string ReadShaderFile(const std::string& filepath);
 	unsigned int CompileShader(unsigned int type, const std::string& source);
 	unsigned int CreateShader(const std::string& computeshader);
-	std::string ReadShaderFile(const std::string& filepath);
-
+	
 	int GetUniformLocation(const std::string& name);
 };

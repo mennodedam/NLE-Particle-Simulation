@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 #include "Test.h"
 
@@ -10,9 +11,6 @@
 
 #include "Particle.h"
 #include "Particlesystem.h"
-#include "ComputeShader.h"
-
-#include <memory>
 
 namespace test {
 

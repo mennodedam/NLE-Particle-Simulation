@@ -18,6 +18,26 @@ ComputeShader::~ComputeShader()
     GLCall(glDeleteProgram(m_RendererID));
 }
 
+std::string ComputeShader::ReadShaderFile(const std::string& filepath)
+{
+    std::ifstream shaderFile;
+    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try
+    {
+        shaderFile.open(filepath);
+        std::stringstream shaderStream;
+        shaderStream << shaderFile.rdbuf();
+        shaderFile.close();
+        return shaderStream.str();
+    }
+    catch (std::ifstream::failure& e)
+    {
+        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
+        return "";
+    }
+}
+
 unsigned int ComputeShader::CompileShader(unsigned int type, const std::string& source)
 {
     unsigned int id = glCreateShader(type);
@@ -35,9 +55,9 @@ unsigned int ComputeShader::CompileShader(unsigned int type, const std::string& 
         if (message == NULL) { std::cout << "Memory allocation failed" << std::endl; }
         glGetShaderInfoLog(id, length, &length, message);
         std::cout << "Failed to compile "
-            << (type == GL_VERTEX_SHADER ? "vertex" :
+            << (type == GL_VERTEX_SHADER   ? "vertex" :
                 type == GL_FRAGMENT_SHADER ? "fragment" :
-                type == GL_COMPUTE_SHADER ? "compute" :
+                type == GL_COMPUTE_SHADER  ? "compute" :
                 "unknown")
             << " shader!" << std::endl;
         std::cout << message << std::endl;
@@ -66,26 +86,6 @@ unsigned int ComputeShader::CreateShader(const std::string& computeshader)
     return program;
 }
 
-std::string ComputeShader::ReadShaderFile(const std::string& filepath)
-{
-    std::ifstream shaderFile;
-    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-    try
-    {
-        shaderFile.open(filepath);
-        std::stringstream shaderStream;
-        shaderStream << shaderFile.rdbuf();
-        shaderFile.close();
-        return shaderStream.str();
-    }
-    catch (std::ifstream::failure& e)
-    {
-        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
-        return "";
-    }
-}
-
 void ComputeShader::Bind() const
 {
     GLCall(glUseProgram(m_RendererID));
@@ -101,11 +101,11 @@ void ComputeShader::Unbind() const
  *
  * Preallocate memory to the gpu, sizeof(Data) * maxSize
  */
-void ComputeShader::initSSBO(unsigned int maxSize)
+void ComputeShader::initSSBO(unsigned int size)
 {
     GLCall(glGenBuffers(1, &m_SSBO));
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, maxSize * sizeof(Particle), nullptr, GL_DYNAMIC_DRAW));
+    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, size * sizeof(Particle), nullptr, GL_DYNAMIC_DRAW));
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
 }
 
@@ -114,11 +114,11 @@ void ComputeShader::initSSBO(unsigned int maxSize)
  *
  * Preallocate memory to the gpu, sizeof(Data) * maxSize
  */
-void ComputeShader::initActiveIDlist(unsigned int maxSize)
+void ComputeShader::initSSBOActiveIDlist(unsigned int size)
 {
     GLCall(glGenBuffers(1, &m_SSBO_ActiveID));
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO_ActiveID));
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, maxSize * sizeof(unsigned int), nullptr, GL_DYNAMIC_DRAW));
+    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, size * sizeof(unsigned int), nullptr, GL_DYNAMIC_DRAW));
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
 }
 
@@ -127,7 +127,7 @@ void ComputeShader::initActiveIDlist(unsigned int maxSize)
  *
  * Upload the entire vector of active id's to the gpu
  */
-void ComputeShader::UpdateIDlist(const std::vector<unsigned int>& idlist)
+void ComputeShader::UploadIDlist(const std::vector<unsigned int>& idlist)
 {
     GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO_ActiveID));
     GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO_ActiveID));

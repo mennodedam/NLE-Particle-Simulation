@@ -7,11 +7,12 @@
 #include <string>
 #include <sstream>
 
-Shader::Shader(const std::string& filepath, const std::string& shadertype)  ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
-	: m_Filepath(filepath), m_RendererID(0), m_SSBO(0), m_SSBO_ActiveID(0)
+Shader::Shader(const std::string& filepath_vertex, const std::string& filepath_fragment)  ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+	: m_Filepath_vertex(filepath_vertex), m_Filepath_fragment(filepath_fragment), m_RendererID(0)
 {   
-    ShaderProgramSource source = ParseShader(filepath);
-    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    //ShaderProgramSource source = ParseShader(filepath);
+    //m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    m_RendererID = CreateShader(filepath_vertex, filepath_fragment);
 }
 
 Shader::~Shader()
@@ -19,34 +20,24 @@ Shader::~Shader()
     GLCall(glDeleteProgram(m_RendererID));
 }
 
-ShaderProgramSource Shader::ParseShader(const std::string& filepath)
+std::string Shader::ReadShaderFile(const std::string& filepath)
 {
-    std::ifstream stream(filepath);
+    std::ifstream shaderFile;
+    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-    enum class ShaderType
+    try
     {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
-    };
-
-    std::string line;
-    std::stringstream ss[2];
-    ShaderType type = ShaderType::NONE;
-    while (getline(stream, line))
-    {
-        if (line.find("#shader") != std::string::npos)
-        {
-            if (line.find("vertex") != std::string::npos)
-                type = ShaderType::VERTEX;
-            else if (line.find("fragment") != std::string::npos)
-                type = ShaderType::FRAGMENT;
-        }
-        else
-        {
-            ss[(int)type] << line << '\n';
-        }
+        shaderFile.open(filepath);
+        std::stringstream shaderStream;
+        shaderStream << shaderFile.rdbuf();
+        shaderFile.close();
+        return shaderStream.str();
     }
-
-    return { ss[0].str(), ss[1].str() };
+    catch (std::ifstream::failure& e)
+    {
+        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
+        return "";
+    }
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
@@ -83,8 +74,12 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+
+    std::string shadercode_vertex = ReadShaderFile(vertexShader);
+    std::string shadercode_fragment = ReadShaderFile(fragmentShader);
+
+    unsigned int vs = CompileShader(GL_VERTEX_SHADER, shadercode_vertex);
+    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, shadercode_fragment);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
@@ -96,43 +91,6 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
     glDeleteShader(fs);
 
     return program;
-}
-
-unsigned int Shader::CreateShaderCompute(const std::string& computeshader)
-{
-    unsigned int program = glCreateProgram();
-
-    std::string shadercode = ReadShaderFile(computeshader);
-    unsigned int cs = CompileShader(GL_COMPUTE_SHADER, shadercode);
-
-    glAttachShader(program, cs);
-
-    glLinkProgram(program);
-    glValidateProgram(program);
-
-    glDeleteShader(cs);
-
-    return program;
-}
-
-std::string Shader::ReadShaderFile(const std::string& filepath)
-{
-    std::ifstream shaderFile;
-    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-    try
-    {
-        shaderFile.open(filepath);
-        std::stringstream shaderStream;
-        shaderStream << shaderFile.rdbuf();
-        shaderFile.close();
-        return shaderStream.str();
-    }
-    catch (std::ifstream::failure& e)
-    {
-        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
-        return "";
-    }
 }
 
 void Shader::Bind() const

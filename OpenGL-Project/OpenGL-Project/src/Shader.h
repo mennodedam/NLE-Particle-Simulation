@@ -18,17 +18,13 @@ struct ShaderProgramSource
 class Shader
 {
 private:
-	std::string m_Filepath;
-
+	std::string m_Filepath_vertex;
+	std::string m_Filepath_fragment;
 	unsigned int m_RendererID;
-
 	std::unordered_map<std::string, int> m_UniformLocationCache;
 
-	GLuint m_SSBO;
-	GLuint m_SSBO_ActiveID;
-
 public:
-	Shader(const std::string& filepath, const std::string& shadertype);	///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+	Shader(const std::string& filepath_vertex, const std::string& filepath_fragment);	///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
 	~Shader();
 
 	void Bind() const;
@@ -40,11 +36,9 @@ public:
 	void SetUniform4f(const std::string& name, float v0, float v1, float f2, float f3);
 	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
 private:
-	ShaderProgramSource ParseShader(const std::string& filepath);
+	std::string ReadShaderFile(const std::string& filepath);
 	unsigned int CompileShader(unsigned int type, const std::string& source);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
-	unsigned int CreateShaderCompute(const std::string& computeshader);
-	std::string ReadShaderFile(const std::string& filepath);
 
 	int GetUniformLocation(const std::string& name);
 };

@@ -44,8 +44,11 @@ public:
 	Particle* data() { return m_Particles.data(); }  
 	const Particle* data() const { return m_Particles.data(); }
 
+	std::vector<unsigned int> IDlistData() { return m_IDlist; }
+
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
 	void DestroyParticle(unsigned int id);
+
 	void PrintIDlist();
 	unsigned int GetParticleCount() const { return m_Particles.size(); };
 	

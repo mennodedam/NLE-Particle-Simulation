@@ -56,13 +56,15 @@ public:
 
 	unsigned int GetMaxNumber() const { return m_MaxParticles; }
 
+	void UpdateMemorySize(unsigned int size) { m_MaxParticles = size; }
+
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
 
 	std::vector<unsigned int> m_IDlist;	///< list van alle id's 
 
-	const size_t m_MaxParticles = 100000;
+	size_t m_MaxParticles = 100000;
 	std::stack<size_t> m_Freelist;
 
 };

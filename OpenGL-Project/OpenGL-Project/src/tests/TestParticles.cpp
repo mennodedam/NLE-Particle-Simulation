@@ -16,6 +16,8 @@ float radius = 1.0f;
 
 
 int particleID = 0;
+int memorySize = 0;
+
 ImVec2 mousePos;
 
 namespace test {
@@ -25,16 +27,17 @@ namespace test {
     {
         std::cout << "Start Particle Test" << std::endl;
 
-        m_Shader        = std::make_unique<Shader>("res/shaders/ParticleShaders/Vertex.glsl", "res/shaders/ParticleShaders/Fragment.glsl"); ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+        m_Shader        = std::make_unique<Shader>("res/shaders/ParticleShaders/Vertex.glsl", "res/shaders/ParticleShaders/Fragment.glsl");
         m_ComputeShader = std::make_unique<ComputeShader>("res/shaders/ParticleShaders/Compute.glsl");
 
         m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());
         m_ComputeShader->initSSBOActiveIDlist(m_Particlesystem.GetMaxNumber());
 
+        m_Particlesystem.InitFreelist();
+
         std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
         std::cout << "Maximum amount of particles: " << m_Particlesystem.GetMaxNumber() << std::endl;
-
-        m_Particlesystem.InitFreelist();
+        memorySize = m_Particlesystem.GetMaxNumber();
     }
 
     TestParticles::~TestParticles()
@@ -95,6 +98,16 @@ namespace test {
         if (ImGui::Button("Print ID's"))
         {
             m_Particlesystem.PrintIDlist();
+        }
+
+        ImGui::Text("Memory Pool: %d Particles", m_Particlesystem.GetMaxNumber());
+        ImGui::InputInt("Memory pool", &memorySize);
+        if (ImGui::Button("Update Memory Pool"))
+        {
+            m_Particlesystem.UpdateMemorySize(memorySize);
+            std::cout << "updated Memory pool to " << memorySize << std::endl;
+            m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());   // reallocate memory on gpu
+            m_ComputeShader->UploadData(m_Particlesystem);                // upload data to gpu.
         }
 
     }

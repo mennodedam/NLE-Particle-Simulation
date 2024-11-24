@@ -47,9 +47,11 @@ public:
 	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
 	void DestroyParticle(unsigned int id);
 	void PrintIDlist();
-	unsigned int GetParticleCount() const;
+	unsigned int GetParticleCount() const { return m_Particles.size(); };
+	
+	void InitFreelist() { for (int i = m_MaxParticles - 1; i >= 0; --i) { m_Freelist.push(i); }	}
 
-	void InitFreelist() { for (int i = m_MaxParticles - 1; i < m_MaxParticles; --i) { m_Freelist.push(i); } }
+	unsigned int GetMaxNumber() const { return m_MaxParticles; }
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.

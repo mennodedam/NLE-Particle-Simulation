@@ -96,13 +96,4 @@ void ParticleSystem::PrintIDlist()
     std::cout << "\n" << std::endl;
 }
 
-/**
- * @brief Retrieves the current count of particles in the particle system.
- *
- * @return The number of particles in the system.
- */
-unsigned int ParticleSystem::GetParticleCount() const
-{
-    return m_Particles.size();
-}
 

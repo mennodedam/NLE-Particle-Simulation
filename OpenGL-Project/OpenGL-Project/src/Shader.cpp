@@ -1,6 +1,5 @@
 #include "Shader.h"
 
-//#include "Renderer.h"
 #include "GLmacros.h"
 
 #include <iostream>
@@ -8,23 +7,11 @@
 #include <string>
 #include <sstream>
 
-Shader::Shader(const std::string& filepath, const std::string& shadertype)
-	: m_Filepath(filepath), m_RendererID(0), m_SSBO(0)
+Shader::Shader(const std::string& filepath, const std::string& shadertype)  ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+	: m_Filepath(filepath), m_RendererID(0), m_SSBO(0), m_SSBO_ActiveID(0)
 {   
-    if (shadertype == "renderer")
-    {
-        ShaderProgramSource source = ParseShader(filepath);
-        m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
-    }
-    else if (shadertype == "compute")
-    {
-        m_RendererID = CreateShaderCompute(filepath);
-    }
-    else
-    {
-        std::cout << "Error: unknown shadertype!" << std::endl;
-    }
-    
+    ShaderProgramSource source = ParseShader(filepath);
+    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
 }
 
 Shader::~Shader()
@@ -79,9 +66,9 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
         if (message == NULL) { std::cout << "Memory allocation failed" << std::endl; }
         glGetShaderInfoLog(id, length, &length, message);
         std::cout << "Failed to compile "
-            << (type == GL_VERTEX_SHADER ? "vertex" :
+            << (type == GL_VERTEX_SHADER   ? "vertex" :
                 type == GL_FRAGMENT_SHADER ? "fragment" :
-                type == GL_COMPUTE_SHADER ? "compute" :
+                type == GL_COMPUTE_SHADER  ? "compute" :
                 "unknown")
             << " shader!" << std::endl;
         std::cout << message << std::endl;
@@ -92,7 +79,6 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 
     return id;
 }
-
 
 unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
@@ -157,45 +143,6 @@ void Shader::Bind() const
 void Shader::Unbind() const
 {
     GLCall(glUseProgram(0));
-}
-
-void Shader::initSSBO()
-{
-    GLCall(glGenBuffers(1, &m_SSBO));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
-}
-
-void Shader::UploadData(ParticleSystem &particlesystem)
-{
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    GLCall(glBufferData(GL_SHADER_STORAGE_BUFFER, particlesystem.size() * sizeof(Particle), particlesystem.data(), GL_DYNAMIC_DRAW));
-    GLCall(glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_SSBO));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
-}
-
-void Shader::Update(ParticleSystem &particlesystem, float deltaTime)
-{
-    GLCall(glUseProgram(m_RendererID));
-    GLCall(glUniform1f(glGetUniformLocation(m_RendererID, "deltaTime"), deltaTime));
-    GLCall(glDispatchCompute((particlesystem.size() + 63) / 64, 1, 1));
-    GLCall(glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT));
-}
-
-void Shader::RetrieveData(ParticleSystem &particlesystem)
-{
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_SSBO));
-    Particle* mappedData = (Particle*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-    if (mappedData == nullptr)
-    {
-        std::cerr << "Error: Failed to map SSBO buffer." << std::endl;
-        GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
-        return;
-    }
-
-    std::memcpy(particlesystem.data(), mappedData, particlesystem.size() * sizeof(Particle));
-    GLCall(glUnmapBuffer(GL_SHADER_STORAGE_BUFFER));
-    GLCall(glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0));
 }
 
 void Shader::SetUniform1i(const std::string& name, int value)

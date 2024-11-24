@@ -10,6 +10,7 @@
 
 #include "Particle.h"
 #include "Particlesystem.h"
+#include "ComputeShader.h"
 
 #include <memory>
 
@@ -26,15 +27,16 @@ namespace test {
 		void OnImGuiRender() override;	
 
 		float m_TimeElapsed;
+
 	private:
 		std::unique_ptr<VertexArray> m_VAO;
 		std::unique_ptr<VertexBuffer> m_VertexBuffer;
 		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<Shader> m_ComputeShader;
+		std::unique_ptr<ComputeShader> m_ComputeShader;
 
 		ParticleSystem m_Particlesystem;
-  
+
 	};
 
 }

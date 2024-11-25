@@ -14,7 +14,6 @@ glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
 float mass = 1.0f;
 float radius = 1.0f;
 
-
 int particleID = 0;
 int memorySize = 0;
 
@@ -72,13 +71,16 @@ namespace test {
         ImGui::Text("Particle count: %d", m_Particlesystem.GetParticleCount());
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::Text("Total time elapsed:%.3f", m_TimeElapsed);
-        ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
-
+        
         if (ImGui::Button("Create Particle"))
         {
-            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color);
-            m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
-            //m_ComputeShader->UploadAddElement(m_Particlesystem, newParticle, freeindex);
+            int freeindex = m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color);
+            //m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
+
+            unsigned int NewestID = m_Particlesystem.ReturnVectorSize()-1;
+            Particle newParticle = m_Particlesystem.ReturnParticle(NewestID); 
+            m_ComputeShader->UploadAddElement(m_Particlesystem, newParticle, NewestID);
+
             //m_ComputeShader->UploadIDlist(m_Particlesystem.IDlistData());     
         }
 
@@ -87,9 +89,9 @@ namespace test {
         {
             m_Particlesystem.DestroyParticle(particleID);
             m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
-            //m_ComputeShader->UploadRemoveElement(m_Particlesystem);
         }
 
+        ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             mousePos = ImGui::GetMousePos();
@@ -104,7 +106,7 @@ namespace test {
         ImGui::InputInt("Memory pool", &memorySize);
         if (ImGui::Button("Update Memory Pool"))
         {
-            m_Particlesystem.UpdateMemorySize(memorySize);
+            m_Particlesystem.MemorySize(memorySize);
             std::cout << "updated Memory pool to " << memorySize << std::endl;
             m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());   // reallocate memory on gpu
             m_ComputeShader->UploadData(m_Particlesystem);                // upload data to gpu.

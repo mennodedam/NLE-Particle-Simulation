@@ -46,7 +46,7 @@ public:
 
 	std::vector<unsigned int> IDlistData() { return m_IDlist; }
 
-	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
+	size_t CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
 	void DestroyParticle(unsigned int id);
 
 	void PrintIDlist();
@@ -56,7 +56,10 @@ public:
 
 	unsigned int GetMaxNumber() const { return m_MaxParticles; }
 
-	void UpdateMemorySize(unsigned int size) { m_MaxParticles = size; }
+	void MemorySize(unsigned int size) { m_MaxParticles = size; }
+
+	Particle ReturnParticle(unsigned int id) { return m_Particles[id]; }
+	unsigned int ReturnVectorSize(void) { return m_Particles.size(); }
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
@@ -66,5 +69,7 @@ private:
 
 	size_t m_MaxParticles = 100000;
 	std::stack<size_t> m_Freelist;
+
+	unsigned int m_NewestParticleID = 0;
 
 };

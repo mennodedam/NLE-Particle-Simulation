@@ -42,7 +42,7 @@ ParticleSystem::~ParticleSystem()
  * @param r The radius of the particle.
  * @param color The color of the particle (glm::vec4).
  */
-void ParticleSystem::CreateParticle(
+size_t ParticleSystem::CreateParticle(
     glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
     glm::vec3 vel = { 0.0f, 0.0f, 0.0f },
     glm::vec3 acc = { 0.0f, 0.0f, 0.0f },
@@ -56,11 +56,13 @@ void ParticleSystem::CreateParticle(
         m_Particles.emplace_back(pos, vel, acc, m, r, color, freeIndex);
         m_IDlist.push_back(freeIndex);
         m_ParticleCount = GetParticleCount();
+        return freeIndex;
     }
     else
     {
         std::cerr << "No free slots available for new particles!" << std::endl;
     }
+    return 0;
 }
 
 /**

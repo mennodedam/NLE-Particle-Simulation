@@ -33,6 +33,7 @@ layout(std430, binding = 0) buffer DataBuffer
 
 uniform float deltaTime;
 
+
 void main() 
 {
     uint i = gl_GlobalInvocationID.x;

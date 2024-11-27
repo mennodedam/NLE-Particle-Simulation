@@ -5,14 +5,8 @@
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
-
-#define ASSERT(x) if (!(x)) __debugbreak();
-#define GLCall(x) GlClearError();\
-    x;\
-    ASSERT(GlLogCall(#x, __FILE__, __LINE__))
-
-void GlClearError();
-bool GlLogCall(const char* function, const char* file, int line);
+#include "ComputeShader.h"
+#include "GLmacros.h"
 
 class Renderer
 {

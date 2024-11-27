@@ -8,26 +8,35 @@
 
 // temp values.
 glm::vec3 position = { 1.0f, 1.0f, 0.0f };
-glm::vec3 velocity = { 1.0f, 1.0f, 0.0f };
+glm::vec3 velocity = { 10.0f, 1000.0f, 0.0f };
 glm::vec3 accelleration = { 1.0f, 1.0f, 0.0f };
 glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
-
 float mass = 1.0f;
 float radius = 1.0f;
 
 int particleID = 0;
+int memorySize = 0;
 
 ImVec2 mousePos;
 
 namespace test {
 
     TestParticles::TestParticles()
+        : m_TimeElapsed(0.0f)
     {
         std::cout << "Start Particle Test" << std::endl;
-        //m_Particlesystem.LoadComputeShader("res/shaders/BasicCompute.glsl");
-        m_Particlesystem.LoadComputeShader2("res/shaders/BasicCompute.glsl");
-        m_Particlesystem.LoadVertexFragmentProgram("res/shaders/BasicVertex.glsl", "res/shaders/BasicFragment.glsl");
-        m_Particlesystem.initSSBOs();
+
+        m_Shader        = std::make_unique<Shader>("res/shaders/ParticleShaders/Vertex.glsl", "res/shaders/ParticleShaders/Fragment.glsl");
+        m_ComputeShader = std::make_unique<ComputeShader>("res/shaders/ParticleShaders/Compute.glsl");
+
+        m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());
+        m_ComputeShader->initSSBOActiveIDlist(m_Particlesystem.GetMaxNumber());
+
+        m_Particlesystem.InitFreelist();
+
+        std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
+        std::cout << "Maximum amount of particles: " << m_Particlesystem.GetMaxNumber() << std::endl;
+        memorySize = m_Particlesystem.GetMaxNumber();
     }
 
     TestParticles::~TestParticles()
@@ -37,33 +46,52 @@ namespace test {
 
     void TestParticles::OnUpdate(float deltaTime)
     {
-        //m_Particlesystem.UploadParticleData();
-        //m_Particlesystem.UpdateParticles(deltaTime);    
-        //m_Particlesystem.RetrieveParticleData();            ///< sommige data wordt fout overgeschreven. ID bijvoorbeeld klopt niet.
+        if (m_Particlesystem.GetParticleCount() != 0)
+        {
+            m_ComputeShader->Update(m_Particlesystem, deltaTime);
+            m_ComputeShader->RetrieveData(m_Particlesystem);  // alleen doen wanneer nodig, ipv bij elke dispatch van de computeshader
+            m_TimeElapsed += deltaTime;
+        }
     }
 
-    void TestParticles::OnRender()
+    void TestParticles::OnRender()  ///< NOG NIET AF.
     {
-        m_Particlesystem.RenderParticles(); ///< Render the particles using batch rendering.
+        GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+        GLCall(glClear(GL_COLOR_BUFFER_BIT));
+
+        Renderer renderer;
+        {
+            m_Shader->Bind();
+            //renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);   ///< *m_VAO en *m_IndexBuffer zijn placeholder.
+        }
     }
 
     void TestParticles::OnImGuiRender()
     {
         ImGui::Text("Particle count: %d", m_Particlesystem.GetParticleCount());
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
-
+        ImGui::Text("Total time elapsed:%.3f", m_TimeElapsed);
+        
         if (ImGui::Button("Create Particle"))
         {
-            m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color, m_Particlesystem.GetParticleCount() + 1);
+            int freeindex = m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color);
+            //m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
+
+            unsigned int NewestID = m_Particlesystem.ReturnVectorSize()-1;
+            Particle newParticle = m_Particlesystem.ReturnParticle(NewestID); 
+            m_ComputeShader->UploadAddElement(m_Particlesystem, newParticle, NewestID);
+
+            //m_ComputeShader->UploadIDlist(m_Particlesystem.IDlistData());     
         }
 
         ImGui::InputInt("Particle ID", &particleID);
         if (ImGui::Button("Remove Particle"))
         {
             m_Particlesystem.DestroyParticle(particleID);
+            m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
         }
 
+        ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             mousePos = ImGui::GetMousePos();
@@ -72,6 +100,16 @@ namespace test {
         if (ImGui::Button("Print ID's"))
         {
             m_Particlesystem.PrintIDlist();
+        }
+
+        ImGui::Text("Memory Pool: %d Particles", m_Particlesystem.GetMaxNumber());
+        ImGui::InputInt("Memory pool", &memorySize);
+        if (ImGui::Button("Update Memory Pool"))
+        {
+            m_Particlesystem.MemorySize(memorySize);
+            std::cout << "updated Memory pool to " << memorySize << std::endl;
+            m_ComputeShader->initSSBO(m_Particlesystem.GetMaxNumber());   // reallocate memory on gpu
+            m_ComputeShader->UploadData(m_Particlesystem);                // upload data to gpu.
         }
 
     }

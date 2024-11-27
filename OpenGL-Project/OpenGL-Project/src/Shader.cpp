@@ -1,17 +1,18 @@
 #include "Shader.h"
 
+#include "GLmacros.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 
-#include "Renderer.h"
-
-Shader::Shader(const std::string& filepath)
-	: m_Filepath(filepath), m_RendererID(0)
+Shader::Shader(const std::string& filepath_vertex, const std::string& filepath_fragment)  ///< tweede argument weg halen, doet op dit moment niks maar code breekt als het weghaalt
+	: m_Filepath_vertex(filepath_vertex), m_Filepath_fragment(filepath_fragment), m_RendererID(0)
 {   
-    ShaderProgramSource source = ParseShader(filepath);
-    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    //ShaderProgramSource source = ParseShader(filepath);
+    //m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+    m_RendererID = CreateShader(filepath_vertex, filepath_fragment);
 }
 
 Shader::~Shader()
@@ -19,34 +20,24 @@ Shader::~Shader()
     GLCall(glDeleteProgram(m_RendererID));
 }
 
-ShaderProgramSource Shader::ParseShader(const std::string& filepath)
+std::string Shader::ReadShaderFile(const std::string& filepath)
 {
-    std::ifstream stream(filepath);
+    std::ifstream shaderFile;
+    shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-    enum class ShaderType
+    try
     {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
-    };
-
-    std::string line;
-    std::stringstream ss[2];
-    ShaderType type = ShaderType::NONE;
-    while (getline(stream, line))
-    {
-        if (line.find("#shader") != std::string::npos)
-        {
-            if (line.find("vertex") != std::string::npos)
-                type = ShaderType::VERTEX;
-            else if (line.find("fragment") != std::string::npos)
-                type = ShaderType::FRAGMENT;
-        }
-        else
-        {
-            ss[(int)type] << line << '\n';
-        }
+        shaderFile.open(filepath);
+        std::stringstream shaderStream;
+        shaderStream << shaderFile.rdbuf();
+        shaderFile.close();
+        return shaderStream.str();
     }
-
-    return { ss[0].str(), ss[1].str() };
+    catch (std::ifstream::failure& e)
+    {
+        std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << filepath << "\n";
+        return "";
+    }
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
@@ -62,11 +53,15 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
     {
         int length;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-        //char* message = (char*)alloca(length * sizeof(char));
         char* message = (char*)malloc(length * sizeof(char));
         if (message == NULL) { std::cout << "Memory allocation failed" << std::endl; }
         glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "Failed to compile" << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << "shader!" << std::endl;
+        std::cout << "Failed to compile "
+            << (type == GL_VERTEX_SHADER   ? "vertex" :
+                type == GL_FRAGMENT_SHADER ? "fragment" :
+                type == GL_COMPUTE_SHADER  ? "compute" :
+                "unknown")
+            << " shader!" << std::endl;
         std::cout << message << std::endl;
         glDeleteShader(id);
         free(message);
@@ -76,12 +71,15 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
     return id;
 }
 
-
 unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+
+    std::string shadercode_vertex = ReadShaderFile(vertexShader);
+    std::string shadercode_fragment = ReadShaderFile(fragmentShader);
+
+    unsigned int vs = CompileShader(GL_VERTEX_SHADER, shadercode_vertex);
+    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, shadercode_fragment);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);

@@ -135,8 +135,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ComputeShader.cpp" />
+    <ClCompile Include="src\GLmacros.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
-    <ClCompile Include="src\loadshader.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Particlesystem.cpp" />
@@ -161,12 +162,16 @@
     <ClCompile Include="src\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\Basic.shader" />
-    <None Include="res\shaders\BasicCompute.glsl" />
-    <None Include="res\shaders\BasicFragment.glsl" />
-    <None Include="res\shaders\BasicVertex.glsl" />
-    <None Include="res\shaders\Circle.shader" />
-    <None Include="res\shaders\ParticleUpdateCompute.shader" />
+    <None Include="res\shaders\Old shaders\Basic.shader" />
+    <None Include="res\shaders\Old shaders\BasicParticle.shader" />
+    <None Include="res\shaders\ParticleShaders\Compute.glsl" />
+    <None Include="res\shaders\ParticleShaders\Fragment.glsl" />
+    <None Include="res\shaders\ParticleShaders\Vertex.glsl" />
+    <None Include="res\shaders\Old shaders\Circle.shader" />
+    <None Include="res\shaders\Circle\Fragment.glsl" />
+    <None Include="res\shaders\Circle\Vertex.glsl" />
+    <None Include="res\shaders\Texture\Fragment.glsl" />
+    <None Include="res\shaders\Texture\Vertex.glsl" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -313,8 +318,9 @@
     <ClInclude Include="deps\glew-2.1.0-win32\glew-2.1.0\include\GL\wglew.h" />
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h" />
     <ClInclude Include="deps\glfw-3.4.bin.WIN64\include\GLFW\glfw3native.h" />
+    <ClInclude Include="src\ComputeShader.h" />
+    <ClInclude Include="src\GLmacros.h" />
     <ClInclude Include="src\IndexBuffer.h" />
-    <ClInclude Include="src\loadshader.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Particlesystem.h" />
     <ClInclude Include="src\Renderer.h" />

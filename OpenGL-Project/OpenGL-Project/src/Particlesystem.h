@@ -25,7 +25,8 @@
 #include "vendor/glm/glm.hpp"
 
 #include "Particle.h"
-#include "Shader.h"
+
+#include <stack>
 
  /**
   * @class ParticleSystem
@@ -39,40 +40,36 @@ public:
 	ParticleSystem();
 	~ParticleSystem();
 
-	void CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color, unsigned int id);
+	size_t size() const { return m_Particles.size(); }
+	Particle* data() { return m_Particles.data(); }  
+	const Particle* data() const { return m_Particles.data(); }
+
+	std::vector<unsigned int> IDlistData() { return m_IDlist; }
+
+	size_t CreateParticle(glm::vec3 pos, glm::vec3 vel, glm::vec3 acc, float m, float r, glm::vec4 color);
 	void DestroyParticle(unsigned int id);
 
-	void initSSBOs();
-	void UploadParticleData();
-	void UpdateParticles(float deltaTime);
-	void RetrieveParticleData();
-
-	bool LoadComputeShader(const std::string& filePath);
-	bool LoadComputeShader2(const std::string& filePath);
-	GLuint LoadVertexShaderProgram(const std::string& filePath);
-	GLuint LoadFragmentShaderProgram(const std::string& filePath);
-	bool LoadVertexFragmentProgram(const std::string& vertexPath, const std::string& fragmentPath);
-
-	unsigned int GetParticleCount() const;
-
-	void RenderParticles();
-
 	void PrintIDlist();
+	unsigned int GetParticleCount() const { return m_Particles.size(); };
+	
+	void InitFreelist() { for (int i = m_MaxParticles - 1; i >= 0; --i) { m_Freelist.push(i); }	}
+
+	unsigned int GetMaxNumber() const { return m_MaxParticles; }
+
+	void MemorySize(unsigned int size) { m_MaxParticles = size; }
+
+	Particle ReturnParticle(unsigned int id) { return m_Particles[id]; }
+	unsigned int ReturnVectorSize(void) { return m_Particles.size(); }
 
 private:
 	std::vector<Particle> m_Particles;  ///< Collection of pointers to particles in the system.
 	unsigned int m_ParticleCount = 0;	///< The current count of particles (initialized as 0).
 
-	GLuint m_ComputeShaderProgram;		///< Handle for the compute shader program used for particle updates.
-	GLuint m_ComputeShaderProgram2;		///< voor loadhsader 2
-	GLuint m_ShaderProgram;				///< Handle for shader program (Shader/Vertex)
-	GLuint m_SSBO;						///< Handle for Shader buffer storage object
-
-	//GLuint m_PositionSSBO, m_VelocitySSBO, m_AccelerationSSBO;
-
-	//std::vector<glm::vec3> m_PositionsGPU;
-	//std::vector<glm::vec3> m_VelocitiesGPU;
-	//std::vector<glm::vec3> m_AccelerationsGPU;
-
 	std::vector<unsigned int> m_IDlist;	///< list van alle id's 
+
+	size_t m_MaxParticles = 100000;
+	std::stack<size_t> m_Freelist;
+
+	unsigned int m_NewestParticleID = 0;
+
 };

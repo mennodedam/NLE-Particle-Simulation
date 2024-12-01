@@ -1,0 +1,59 @@
+\doxysection{scalar\+\_\+int\+\_\+sized.\+hpp}
+\hypertarget{scalar__int__sized_8hpp_source}{}\label{scalar__int__sized_8hpp_source}\index{C:/Users/menno/Desktop/BESTANDEN/SCHOOL/HBO Elektrotechniek jaar 4/4AB Minor Next Level Engineering/Project/NLE-\/Particle-\/Simulation/OpenGL-\/Project/OpenGL-\/Project/src/vendor/glm/ext/scalar\_int\_sized.hpp@{C:/Users/menno/Desktop/BESTANDEN/SCHOOL/HBO Elektrotechniek jaar 4/4AB Minor Next Level Engineering/Project/NLE-\/Particle-\/Simulation/OpenGL-\/Project/OpenGL-\/Project/src/vendor/glm/ext/scalar\_int\_sized.hpp}}
+\mbox{\hyperlink{scalar__int__sized_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../detail/setup.hpp"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#if\ GLM\_MESSAGES\ ==\ GLM\_ENABLE\ \&\&\ !defined(GLM\_EXT\_INCLUDED)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#\ \ \ pragma\ message("{}GLM:\ GLM\_EXT\_scalar\_int\_sized\ extension\ included"{})}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceglm}{glm}}\{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{namespace\ }detail}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#\ \ \ if\ GLM\_HAS\_EXTENDED\_INTEGER\_TYPE}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ std::int8\_t\ \ \ \ \ \ \ \ \ int8;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ std::int16\_t\ \ \ \ \ \ \ \ int16;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ std::int32\_t\ \ \ \ \ \ \ \ int32;}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#\ \ \ else}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ \ int8;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{short}\ \ \ \ \ \ \ \ int16;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ int32;}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}\textcolor{comment}{//}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structglm_1_1detail_1_1is__int}{is\_int}}<int8>}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacetest}{test}}\ \{value\ =\ \string~0\};}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structglm_1_1detail_1_1is__int}{is\_int}}<int16>}
+\DoxyCodeLine{00042\ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacetest}{test}}\ \{value\ =\ \string~0\};}
+\DoxyCodeLine{00044\ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structglm_1_1detail_1_1is__int}{is\_int}}<int64>}
+\DoxyCodeLine{00048\ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacetest}{test}}\ \{value\ =\ \string~0\};}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \}\textcolor{comment}{//namespace\ detail}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{typedef}\ detail::int8\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__ext__scalar__int__sized_gaf9d6ceaf8a36734c0a026f6f699ff60c}{int8}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{typedef}\ detail::int16\ \ \ \ \ \ \ \mbox{\hyperlink{group__ext__scalar__int__sized_ga22d9cd55823f7c4aeee13aceafd7238a}{int16}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{typedef}\ detail::int32\ \ \ \ \ \ \ \mbox{\hyperlink{group__ext__scalar__int__sized_gafc36c598ca57ab4a9286a53bf91a5fff}{int32}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{typedef}\ detail::int64\ \ \ \ \ \ \ \mbox{\hyperlink{group__ext__scalar__int__sized_ga435d75819cce297cc5fa21bd84ef89a5}{int64}};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \}\textcolor{comment}{//namespace\ glm}}
+
+\end{DoxyCode}

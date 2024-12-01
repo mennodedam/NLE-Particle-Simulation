@@ -31,8 +31,11 @@
  /**
   * @class ParticleSystem
   * @brief Manages a system of particles, including creation, updating, and destruction.
-  *
-  * Detailed description. TO DO
+  * 
+  * @details
+  * The ParticleSystem class manages a collection of particles in the simulation. It provides
+  * functionality for creating new particles, updating their properties, and destroying them.
+  * The class also maintains a list of unique identifiers for each particle in the system.
   */
 class ParticleSystem
 {

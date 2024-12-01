@@ -1,0 +1,68 @@
+\doxysection{Particlesystem.\+cpp}
+\hypertarget{_particlesystem_8cpp_source}{}\label{_particlesystem_8cpp_source}\index{src/Particlesystem.cpp@{src/Particlesystem.cpp}}
+\mbox{\hyperlink{_particlesystem_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_particlesystem_8h}{Particlesystem.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_shader_8h}{Shader.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_renderer_8h}{Renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00028}\mbox{\hyperlink{class_particle_system_a9028ec8023c61773dd4a668c3ad8cc26}{00028}}\ \mbox{\hyperlink{class_particle_system_a9028ec8023c61773dd4a668c3ad8cc26}{ParticleSystem::ParticleSystem}}()}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00029}00029\ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00038}\mbox{\hyperlink{class_particle_system_a6bc725349a763b9d6817950cde16a93f}{00038}}\ \mbox{\hyperlink{class_particle_system_a6bc725349a763b9d6817950cde16a93f}{ParticleSystem::\string~ParticleSystem}}()}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00057}\mbox{\hyperlink{class_particle_system_aa80ef81a1ab601c6e2f5d53579516874}{00057}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_particle_system_aa80ef81a1ab601c6e2f5d53579516874}{ParticleSystem::CreateParticle}}(}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00058}00058\ \ \ \ \ glm::vec3\ pos\ =\ \{\ 0.0f,\ 0.0f,\ 0.0f\ \},}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00059}00059\ \ \ \ \ glm::vec3\ vel\ =\ \{\ 0.0f,\ 0.0f,\ 0.0f\ \},}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00060}00060\ \ \ \ \ glm::vec3\ acc\ =\ \{\ 0.0f,\ 0.0f,\ 0.0f\ \},}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{float}\ m\ =\ 1.0,\ \textcolor{keywordtype}{float}\ r\ =\ 1.0,}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00062}00062\ \ \ \ \ glm::vec4\ color\ =\ \{\ 1.0f,\ 0.0f,\ 0.0f,\ 1.0f\ \})}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00063}00063\ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_Freelist.empty())}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ freeIndex\ =\ m\_Freelist.top();}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ m\_Freelist.pop();}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ m\_Particles.emplace\_back(pos,\ vel,\ acc,\ m,\ r,\ color,\ freeIndex);}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ m\_IDlist.push\_back(freeIndex);}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ m\_ParticleCount\ =\ GetParticleCount();}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ freeIndex;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00074}00074\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}No\ free\ slots\ available\ for\ new\ particles!"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00091}\mbox{\hyperlink{class_particle_system_a9a0687cb9e5b8526eb317b5c466fa2da}{00091}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_particle_system_a9a0687cb9e5b8526eb317b5c466fa2da}{ParticleSystem::DestroyParticle}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00092}00092\ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00093}00093\ \ \ \ \ m\_Freelist.push(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00095}00095\ \ \ \ \ m\_Particles.erase}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00096}00096\ \ \ \ \ (}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ std::remove\_if(m\_Particles.begin(),\ m\_Particles.end(),}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keywordtype}{id}](\textcolor{keyword}{const}\ \mbox{\hyperlink{class_particle}{Particle}}\&\ p)\ \{\ return\ p.getID()\ ==\ id;\ \}),}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ m\_Particles.end()}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00100}00100\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00102}00102\ \ \ \ \ m\_Particles.shrink\_to\_fit();}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00103}00103\ \ \ \ \ m\_ParticleCount\ =\ \mbox{\hyperlink{class_particle_system_af33347352cd5e19f62154e305f702507}{GetParticleCount}}();}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00104}00104\ \ \ \ \ m\_IDlist.erase(std::remove(m\_IDlist.begin(),\ m\_IDlist.end(),\ \textcolor{keywordtype}{id}),\ m\_IDlist.end());}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00113}\mbox{\hyperlink{class_particle_system_a334ac747ea0296c78ffa884d6fe80e76}{00113}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_particle_system_a334ac747ea0296c78ffa884d6fe80e76}{ParticleSystem::PrintIDlist}}()}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00114}00114\ \{}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00115}00115\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Printing\ id\ list,\ size:\ "{}}\ <<\ m\_IDlist.size()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ m\_IDlist.size();\ i++)}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ std::cout\ <<\ m\_IDlist[i]\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00118}00118\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_particlesystem_8cpp_source_l00121}00121\ }
+
+\end{DoxyCode}

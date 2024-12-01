@@ -1,0 +1,23 @@
+\doxysection{Renderer.\+cpp}
+\hypertarget{_renderer_8cpp_source}{}\label{_renderer_8cpp_source}\index{src/Renderer.cpp@{src/Renderer.cpp}}
+\mbox{\hyperlink{_renderer_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_renderer_8h}{Renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00027}\mbox{\hyperlink{class_renderer_a39adf4c82c15dad54d7f42f6bd035ff6}{00027}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_renderer_a39adf4c82c15dad54d7f42f6bd035ff6}{Renderer::Clear}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00028}00028\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00029}00029\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glClear(GL\_COLOR\_BUFFER\_BIT));}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00045}\mbox{\hyperlink{class_renderer_aed7ac4a042cf7c73ef53a0488531fc3e}{00045}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_renderer_aed7ac4a042cf7c73ef53a0488531fc3e}{Renderer::Draw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vertex_array}{VertexArray}}\&\ va,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_index_buffer}{IndexBuffer}}\&\ ib,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_shader}{Shader}}\&\ shader)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00046}00046\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00047}00047\ \ \ \ \ shader.\mbox{\hyperlink{class_shader_a5a5a24f72050f46f03cb839b41490527}{Bind}}();}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00048}00048\ \ \ \ \ va.\mbox{\hyperlink{class_vertex_array_ad5059455f0864327028636c628d5a661}{Bind}}();}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00049}00049\ \ \ \ \ ib.\mbox{\hyperlink{class_index_buffer_ac8bdd0495f718173fb46691ad1b7e4af}{Bind}}();}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glDrawElements(GL\_TRIANGLES,\ ib.\mbox{\hyperlink{class_index_buffer_a3ec4dba9cc97dfedac07d6375d25b3b6}{GetCount}}(),\ GL\_UNSIGNED\_INT,\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{\Hypertarget{_renderer_8cpp_source_l00051}00051\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,47 @@
+\doxysection{test.\+h}
+\hypertarget{test_8h_source}{}\label{test_8h_source}\index{C:/Users/menno/Desktop/BESTANDEN/SCHOOL/HBO Elektrotechniek jaar 4/4AB Minor Next Level Engineering/Project/NLE-\/Particle-\/Simulation/OpenGL-\/Project/OpenGL-\/Project/src/tests/test.h@{C:/Users/menno/Desktop/BESTANDEN/SCHOOL/HBO Elektrotechniek jaar 4/4AB Minor Next Level Engineering/Project/NLE-\/Particle-\/Simulation/OpenGL-\/Project/OpenGL-\/Project/src/tests/test.h}}
+\mbox{\hyperlink{test_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <functional>}\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacetest}{test}}\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classtest_1_1_test}{Test}}}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtest_1_1_test}{Test}}()\ \{\}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classtest_1_1_test}{\string~Test}}()\ \{\}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnUpdate(\textcolor{keywordtype}{float}\ deltaTime)\ \{\}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnRender()\ \{\}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnImGuiRender()\ \{\}}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classtest_1_1_test_menu}{TestMenu}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classtest_1_1_test}{Test}}}
+\DoxyCodeLine{00055\ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtest_1_1_test_menu}{TestMenu}}(\mbox{\hyperlink{classtest_1_1_test}{Test}}*\&\ currentTestPointer);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ OnImGuiRender()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterTest(\textcolor{keyword}{const}\ std::string\&\ name)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Registering\ Test\ "{}}\ <<\ name\ <<\ std::endl;\ \ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Tests.push\_back(std::make\_pair(name,\ []()\ \{\textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ T();\ \}));}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtest_1_1_test}{Test}}*\&\ m\_CurrentTest;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::vector<std::pair<std::string,\ std::function<\mbox{\hyperlink{classtest_1_1_test}{Test}}*()>>>\ m\_Tests;}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \}}
+
+\end{DoxyCode}

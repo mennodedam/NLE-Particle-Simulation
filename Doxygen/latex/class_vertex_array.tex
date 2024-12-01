@@ -1,0 +1,124 @@
+\doxysection{Vertex\+Array Class Reference}
+\hypertarget{class_vertex_array}{}\label{class_vertex_array}\index{VertexArray@{VertexArray}}
+
+
+Forward declaration of \doxylink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout}.  
+
+
+
+
+{\ttfamily \#include $<$Vertex\+Array.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vertex_array_ab8a2dcce9698f96dac5f9a19c6979d03}{Vertex\+Array}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_vertex_array}{Vertex\+Array} constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex_array_a82597eb9daba5ad66dd3cf898e159a95}{\texorpdfstring{$\sim$}{\string~}\+Vertex\+Array}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_vertex_array}{Vertex\+Array} destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_array_a994a9dc780ecc0c725b0814a9e7ab532}{Add\+Buffer}} (const \mbox{\hyperlink{class_vertex_buffer}{Vertex\+Buffer}} \&vb, const \mbox{\hyperlink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout}} \&layout)
+\begin{DoxyCompactList}\small\item\em Add a buffer to the \doxylink{class_vertex_array}{Vertex\+Array}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_array_ad5059455f0864327028636c628d5a661}{Bind}} () const
+\begin{DoxyCompactList}\small\item\em Bind the \doxylink{class_vertex_array}{Vertex\+Array} to the GPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_array_a73f0d868a6c76622bcd57063a2c2d8d4}{Unbind}} () const
+\begin{DoxyCompactList}\small\item\em Unbind the \doxylink{class_vertex_array}{Vertex\+Array} from the GPU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Forward declaration of \doxylink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout}. 
+
+A class that represents a \doxylink{class_vertex_array}{Vertex\+Array}
+
+This class represents a \doxylink{class_vertex_array}{Vertex\+Array} that can be used to store Vertex\+Buffers. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8h_source_l00034}{34}} of file \mbox{\hyperlink{_vertex_array_8h_source}{Vertex\+Array.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_vertex_array_ab8a2dcce9698f96dac5f9a19c6979d03}\index{VertexArray@{VertexArray}!VertexArray@{VertexArray}}
+\index{VertexArray@{VertexArray}!VertexArray@{VertexArray}}
+\doxysubsubsection{\texorpdfstring{VertexArray()}{VertexArray()}}
+{\footnotesize\ttfamily \label{class_vertex_array_ab8a2dcce9698f96dac5f9a19c6979d03} 
+Vertex\+Array\+::\+Vertex\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_vertex_array}{Vertex\+Array} constructor. 
+
+This constructor generates a new \doxylink{class_vertex_array}{Vertex\+Array} object. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8cpp_source_l00025}{25}} of file \mbox{\hyperlink{_vertex_array_8cpp_source}{Vertex\+Array.\+cpp}}.
+
+\Hypertarget{class_vertex_array_a82597eb9daba5ad66dd3cf898e159a95}\index{VertexArray@{VertexArray}!````~VertexArray@{\texorpdfstring{$\sim$}{\string~}VertexArray}}
+\index{````~VertexArray@{\texorpdfstring{$\sim$}{\string~}VertexArray}!VertexArray@{VertexArray}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}VertexArray()}{\string~VertexArray()}}
+{\footnotesize\ttfamily \label{class_vertex_array_a82597eb9daba5ad66dd3cf898e159a95} 
+Vertex\+Array\+::\texorpdfstring{$\sim$}{\string~}\+Vertex\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_vertex_array}{Vertex\+Array} destructor. 
+
+This destructor deletes the \doxylink{class_vertex_array}{Vertex\+Array} object from the GPU. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8cpp_source_l00036}{36}} of file \mbox{\hyperlink{_vertex_array_8cpp_source}{Vertex\+Array.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_vertex_array_a994a9dc780ecc0c725b0814a9e7ab532}\index{VertexArray@{VertexArray}!AddBuffer@{AddBuffer}}
+\index{AddBuffer@{AddBuffer}!VertexArray@{VertexArray}}
+\doxysubsubsection{\texorpdfstring{AddBuffer()}{AddBuffer()}}
+{\footnotesize\ttfamily \label{class_vertex_array_a994a9dc780ecc0c725b0814a9e7ab532} 
+void Vertex\+Array\+::\+Add\+Buffer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vertex_buffer}{Vertex\+Buffer}} \&}]{vb}{, }\item[{const \mbox{\hyperlink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout}} \&}]{layout}{}\end{DoxyParamCaption})}
+
+
+
+Add a buffer to the \doxylink{class_vertex_array}{Vertex\+Array}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vb} & The \doxylink{class_vertex_buffer}{Vertex\+Buffer} to add \\
+\hline
+{\em layout} & The \doxylink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout} to add\\
+\hline
+\end{DoxyParams}
+This method adds a \doxylink{class_vertex_buffer}{Vertex\+Buffer} to the \doxylink{class_vertex_array}{Vertex\+Array} with the given \doxylink{class_vertex_buffer_layout}{Vertex\+Buffer\+Layout}. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8cpp_source_l00050}{50}} of file \mbox{\hyperlink{_vertex_array_8cpp_source}{Vertex\+Array.\+cpp}}.
+
+\Hypertarget{class_vertex_array_ad5059455f0864327028636c628d5a661}\index{VertexArray@{VertexArray}!Bind@{Bind}}
+\index{Bind@{Bind}!VertexArray@{VertexArray}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{class_vertex_array_ad5059455f0864327028636c628d5a661} 
+void Vertex\+Array\+::\+Bind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Bind the \doxylink{class_vertex_array}{Vertex\+Array} to the GPU. 
+
+This method binds the \doxylink{class_vertex_array}{Vertex\+Array} to the GPU. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8cpp_source_l00071}{71}} of file \mbox{\hyperlink{_vertex_array_8cpp_source}{Vertex\+Array.\+cpp}}.
+
+\Hypertarget{class_vertex_array_a73f0d868a6c76622bcd57063a2c2d8d4}\index{VertexArray@{VertexArray}!Unbind@{Unbind}}
+\index{Unbind@{Unbind}!VertexArray@{VertexArray}}
+\doxysubsubsection{\texorpdfstring{Unbind()}{Unbind()}}
+{\footnotesize\ttfamily \label{class_vertex_array_a73f0d868a6c76622bcd57063a2c2d8d4} 
+void Vertex\+Array\+::\+Unbind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Unbind the \doxylink{class_vertex_array}{Vertex\+Array} from the GPU. 
+
+This method unbinds the \doxylink{class_vertex_array}{Vertex\+Array} from the GPU. 
+
+Definition at line \mbox{\hyperlink{_vertex_array_8cpp_source_l00082}{82}} of file \mbox{\hyperlink{_vertex_array_8cpp_source}{Vertex\+Array.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_vertex_array_8h}{Vertex\+Array.\+h}}\item 
+src/\mbox{\hyperlink{_vertex_array_8cpp}{Vertex\+Array.\+cpp}}\end{DoxyCompactItemize}

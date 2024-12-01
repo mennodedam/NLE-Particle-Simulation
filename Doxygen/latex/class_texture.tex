@@ -1,0 +1,133 @@
+\doxysection{Texture Class Reference}
+\hypertarget{class_texture}{}\label{class_texture}\index{Texture@{Texture}}
+
+
+A class that represents a texture.  
+
+
+
+
+{\ttfamily \#include $<$Texture.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_texture_a4cd45e8898c02b5a5c790a479233124b}{Texture}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_texture}{Texture} constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_texture_a09c4bcb7462f64c1d20fa69dba3cee8a}{\texorpdfstring{$\sim$}{\string~}\+Texture}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_texture}{Texture} destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_texture_a14a2a70d9f130ac91a5ac95c8a4c7831}{Bind}} (unsigned int slot=0) const
+\begin{DoxyCompactList}\small\item\em Bind the texture to the GPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_texture_a0bff249ecfb46e9b08c6ba52d64a921e}{Unbind}} () const
+\begin{DoxyCompactList}\small\item\em Unbind the texture from the GPU. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_texture_a7f5ee18c7466f904fa371bd97399a944}{Get\+Width}} () const
+\item 
+int \mbox{\hyperlink{class_texture_a289701837e23c9272509f377524ee8f2}{Get\+Height}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that represents a texture. 
+
+This class represents a texture that can be loaded from a file and bound to the GPU. 
+
+Definition at line \mbox{\hyperlink{_texture_8h_source_l00026}{26}} of file \mbox{\hyperlink{_texture_8h_source}{Texture.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_texture_a4cd45e8898c02b5a5c790a479233124b}\index{Texture@{Texture}!Texture@{Texture}}
+\index{Texture@{Texture}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{Texture()}{Texture()}}
+{\footnotesize\ttfamily \label{class_texture_a4cd45e8898c02b5a5c790a479233124b} 
+Texture\+::\+Texture (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_texture}{Texture} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the texture file\\
+\hline
+\end{DoxyParams}
+This constructor loads the texture from the given path and stores it in the local buffer. 
+
+Definition at line \mbox{\hyperlink{_texture_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{_texture_8cpp_source}{Texture.\+cpp}}.
+
+\Hypertarget{class_texture_a09c4bcb7462f64c1d20fa69dba3cee8a}\index{Texture@{Texture}!````~Texture@{\texorpdfstring{$\sim$}{\string~}Texture}}
+\index{````~Texture@{\texorpdfstring{$\sim$}{\string~}Texture}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Texture()}{\string~Texture()}}
+{\footnotesize\ttfamily \label{class_texture_a09c4bcb7462f64c1d20fa69dba3cee8a} 
+Texture\+::\texorpdfstring{$\sim$}{\string~}\+Texture (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_texture}{Texture} destructor. 
+
+This destructor deletes the texture from the GPU. 
+
+Definition at line \mbox{\hyperlink{_texture_8cpp_source_l00053}{53}} of file \mbox{\hyperlink{_texture_8cpp_source}{Texture.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_texture_a14a2a70d9f130ac91a5ac95c8a4c7831}\index{Texture@{Texture}!Bind@{Bind}}
+\index{Bind@{Bind}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{class_texture_a14a2a70d9f130ac91a5ac95c8a4c7831} 
+void Texture\+::\+Bind (\begin{DoxyParamCaption}\item[{unsigned int}]{slot}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Bind the texture to the GPU. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slot} & The slot to bind the texture to\\
+\hline
+\end{DoxyParams}
+This method binds the texture to the GPU. 
+
+Definition at line \mbox{\hyperlink{_texture_8cpp_source_l00066}{66}} of file \mbox{\hyperlink{_texture_8cpp_source}{Texture.\+cpp}}.
+
+\Hypertarget{class_texture_a289701837e23c9272509f377524ee8f2}\index{Texture@{Texture}!GetHeight@{GetHeight}}
+\index{GetHeight@{GetHeight}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{GetHeight()}{GetHeight()}}
+{\footnotesize\ttfamily \label{class_texture_a289701837e23c9272509f377524ee8f2} 
+int Texture\+::\+Get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_texture_8h_source_l00041}{41}} of file \mbox{\hyperlink{_texture_8h_source}{Texture.\+h}}.
+
+\Hypertarget{class_texture_a7f5ee18c7466f904fa371bd97399a944}\index{Texture@{Texture}!GetWidth@{GetWidth}}
+\index{GetWidth@{GetWidth}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{GetWidth()}{GetWidth()}}
+{\footnotesize\ttfamily \label{class_texture_a7f5ee18c7466f904fa371bd97399a944} 
+int Texture\+::\+Get\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_texture_8h_source_l00040}{40}} of file \mbox{\hyperlink{_texture_8h_source}{Texture.\+h}}.
+
+\Hypertarget{class_texture_a0bff249ecfb46e9b08c6ba52d64a921e}\index{Texture@{Texture}!Unbind@{Unbind}}
+\index{Unbind@{Unbind}!Texture@{Texture}}
+\doxysubsubsection{\texorpdfstring{Unbind()}{Unbind()}}
+{\footnotesize\ttfamily \label{class_texture_a0bff249ecfb46e9b08c6ba52d64a921e} 
+void Texture\+::\+Unbind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Unbind the texture from the GPU. 
+
+This method unbinds the texture from the GPU. 
+
+Definition at line \mbox{\hyperlink{_texture_8cpp_source_l00078}{78}} of file \mbox{\hyperlink{_texture_8cpp_source}{Texture.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_texture_8h}{Texture.\+h}}\item 
+src/\mbox{\hyperlink{_texture_8cpp}{Texture.\+cpp}}\end{DoxyCompactItemize}

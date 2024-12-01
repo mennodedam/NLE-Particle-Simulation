@@ -1,3 +1,16 @@
+/**
+ * @file test.h
+ * @brief This file contains the Test class and its methods.
+ *
+ * @details This file contains the declaration of the Test class and its methods.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <vector>
@@ -5,8 +18,21 @@
 #include <functional> 
 #include <iostream>
 
+/**
+ * @brief The test namespace contains the Test class and its methods.
+ * 
+ * @details
+ * The test namespace contains the Test class and its methods.
+ */
 namespace test {
 
+	/**
+	 * @class Test
+	 * @brief The Test class is a virtual class that is used to create tests.
+	 * 
+	 * @details
+	 * The Test class is a virtual class that is used to create tests.
+	 */
 	class Test
 	{
 	public:
@@ -18,6 +44,13 @@ namespace test {
 		virtual void OnImGuiRender() {}
 	};
 
+	/**
+	 * @class
+	 * @brief The TestMenu class is a class that is used to create a menu for the tests.
+	 * 
+	 * @details
+	 * The TestMenu class is a class that is used to create a menu for the tests.
+	 */
 	class TestMenu : public Test
 	{
 	public:

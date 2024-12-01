@@ -1,0 +1,35 @@
+\doxysection{Index\+Buffer.\+cpp}
+\hypertarget{_index_buffer_8cpp_source}{}\label{_index_buffer_8cpp_source}\index{src/IndexBuffer.cpp@{src/IndexBuffer.cpp}}
+\mbox{\hyperlink{_index_buffer_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_index_buffer_8h}{IndexBuffer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_renderer_8h}{Renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00029}\mbox{\hyperlink{class_index_buffer_aa62b83970f954463fe7bf1e4954c3177}{00029}}\ \mbox{\hyperlink{class_index_buffer_aa62b83970f954463fe7bf1e4954c3177}{IndexBuffer::IndexBuffer}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ data,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00030}00030\ \ \ \ \ :\ m\_Count(count)}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})\ ==\ \textcolor{keyword}{sizeof}(GLuint));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glGenBuffers(1,\ \&m\_RendererID));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glBindBuffer(GL\_ELEMENT\_ARRAY\_BUFFER,\ m\_RendererID));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glBufferData(GL\_ELEMENT\_ARRAY\_BUFFER,\ count\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}),\ data,\ GL\_STATIC\_DRAW));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00045}\mbox{\hyperlink{class_index_buffer_a348889936f378b7942c1e01d83e42866}{00045}}\ \mbox{\hyperlink{class_index_buffer_a348889936f378b7942c1e01d83e42866}{IndexBuffer::\string~IndexBuffer}}()}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00047}00047\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glDeleteBuffers(1,\ \&m\_RendererID));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00056}\mbox{\hyperlink{class_index_buffer_ac8bdd0495f718173fb46691ad1b7e4af}{00056}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_index_buffer_ac8bdd0495f718173fb46691ad1b7e4af}{IndexBuffer::Bind}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00057}00057\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00058}00058\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glBindBuffer(GL\_ELEMENT\_ARRAY\_BUFFER,\ m\_RendererID));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00067}\mbox{\hyperlink{class_index_buffer_a5a1cfc46339ea7d6e72d22a096da5a77}{00067}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_index_buffer_a5a1cfc46339ea7d6e72d22a096da5a77}{IndexBuffer::Unbind}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00068}00068\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(glBindBuffer(GL\_ELEMENT\_ARRAY\_BUFFER,\ 0));}
+\DoxyCodeLine{\Hypertarget{_index_buffer_8cpp_source_l00070}00070\ \}}
+
+\end{DoxyCode}

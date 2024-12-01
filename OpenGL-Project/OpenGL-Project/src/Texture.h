@@ -1,7 +1,28 @@
+/**
+ * @file texture.h
+ * @brief This file contains the Texture class and its methods.
+ *
+ * @details 
+ * This file contains the Texture class and its methods.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include "Renderer.h"
 
+/**
+ * @class Texture
+ * @brief A class that represents a texture
+ * 
+ * @details
+ * This class represents a texture that can be loaded from a file and bound to the GPU.
+ */
 class Texture
 {
 private:

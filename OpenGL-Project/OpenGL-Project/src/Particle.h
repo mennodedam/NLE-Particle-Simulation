@@ -1,3 +1,17 @@
+/**
+ * @file Particle.h
+ * @brief Implements the Particle class for managing particles in the simulation.
+ *
+ * @details This file includes the method definitions for creating, updating, and
+ * destroying particles within the Particle class.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <vector>
@@ -5,6 +19,14 @@
 
 #include "vendor/glm/glm.hpp" 
 
+/**
+ * @class Particle
+ * @brief The Particle class for managing particles in the simulation.
+ * 
+ * @details
+ * This class contains the properties of a particle, such as its position, velocity,
+ * acceleration, mass, radius, color, and ID.
+ */
 class Particle
 {
 public:

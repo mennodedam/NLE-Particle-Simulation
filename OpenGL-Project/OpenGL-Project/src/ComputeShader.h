@@ -1,3 +1,19 @@
+/**
+ * @file ComputeShader.h
+ * @brief This file contains the ComputeShader class and its methods.
+ *
+ * @details This file contains the ComputeShader class and its methods.
+ * The ComputeShader class is used to create, bind, and unbind compute shaders.
+ * The class also includes methods for uploading data to the GPU, setting uniforms,
+ * and retrieving data from the GPU.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <string>
@@ -9,6 +25,17 @@
 
 #include "Particlesystem.h"
 
+/** 
+ * @class ComputeShader
+ * @brief ComputeShader class
+ * 
+ * @details This class includes the method definitions for creating, binding, and
+ * unbinding compute shaders within the ComputeShader class.
+ * 
+ * The ComputeShader class is used to create, bind, and unbind compute shaders.
+ * The class also includes methods for uploading data to the GPU, setting uniforms,
+ * and retrieving data from the GPU.
+ */
 class ComputeShader
 {
 private:

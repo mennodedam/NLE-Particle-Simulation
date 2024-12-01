@@ -1,3 +1,16 @@
+/**
+ * @file TestParticles.h
+ * @brief This file contains the Particle test class and its methods.
+ *
+ * @details This file contains the declaration of the Particle test.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <iostream>
@@ -12,8 +25,21 @@
 #include "Particle.h"
 #include "Particlesystem.h"
 
+/**
+ * @brief The test namespace contains the TestParticles class and its methods.
+ * 
+ * @details
+ * The test namespace contains the TestParticles class and its methods.
+ */
 namespace test {
 
+	/**
+	 * @class TestParticles
+	 * @brief The TestParticles class is a class that is used to create a Particle test.
+	 * 
+	 * @details
+	 * The TestParticles class is a class that is used to create a Particle test.
+	 */
 	class TestParticles : public Test
 	{
 	public:

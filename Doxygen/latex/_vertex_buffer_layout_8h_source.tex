@@ -1,0 +1,71 @@
+\doxysection{Vertex\+Buffer\+Layout.\+h}
+\hypertarget{_vertex_buffer_layout_8h_source}{}\label{_vertex_buffer_layout_8h_source}\index{src/VertexBufferLayout.h@{src/VertexBufferLayout.h}}
+\mbox{\hyperlink{_vertex_buffer_layout_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00014}00014\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_renderer_8h}{Renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00026}\mbox{\hyperlink{struct_vertex_buffer_element}{00026}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_vertex_buffer_element}{VertexBufferElement}}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00027}00027\ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00028}\mbox{\hyperlink{struct_vertex_buffer_element_aebaf924b86871f57f006846ba7443676}{00028}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_vertex_buffer_element_aebaf924b86871f57f006846ba7443676}{type}};}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00029}\mbox{\hyperlink{struct_vertex_buffer_element_af2d13355b799b11b6ffbc0a34fb03f8a}{00029}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_vertex_buffer_element_af2d13355b799b11b6ffbc0a34fb03f8a}{count}};}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00030}\mbox{\hyperlink{struct_vertex_buffer_element_aa5216544514d8d4c9baab824d6e48c06}{00030}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{struct_vertex_buffer_element_aa5216544514d8d4c9baab824d6e48c06}{normalized}};}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00032}\mbox{\hyperlink{struct_vertex_buffer_element_a8465417a435f8bcd68a71bc414f1d0ee}{00032}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_vertex_buffer_element_a8465417a435f8bcd68a71bc414f1d0ee}{GetSizeOfType}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_vertex_buffer_element_aebaf924b86871f57f006846ba7443676}{type}})}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{struct_vertex_buffer_element_aebaf924b86871f57f006846ba7443676}{type}})}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ GL\_FLOAT:\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ GL\_UNSIGNED\_INT:\ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ GL\_UNSIGNED\_BYTE:\ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00043}00043\ \};}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00052}\mbox{\hyperlink{class_vertex_buffer_layout}{00052}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vertex_buffer_layout}{VertexBufferLayout}}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00054}00054\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00055}00055\ \ \ \ \ std::vector<VertexBufferElement>\ m\_Elements;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_Stride;}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00057}00057\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00058}\mbox{\hyperlink{class_vertex_buffer_layout_a1e10e1d0c533a91948466fa4f88bab09}{00058}}\ \ \ \ \ \mbox{\hyperlink{class_vertex_buffer_layout_a1e10e1d0c533a91948466fa4f88bab09}{VertexBufferLayout}}()}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ :\ m\_Stride(0)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00062}\mbox{\hyperlink{class_vertex_buffer_layout_a7e1ef819bf5dc21d20bb38d9c6914aa5}{00062}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vertex_buffer_layout_a7e1ef819bf5dc21d20bb38d9c6914aa5}{Push}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00063}00063\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//static\_assert(false);\ //werkt\ niet\ in\ vs2022}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(T)\ ==\ 0,\ \textcolor{stringliteral}{"{}Unsupported\ type\ for\ VertexBufferLayout::Push"{}});}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00069}\mbox{\hyperlink{class_vertex_buffer_layout_a0ac1e4373209bf1a2c5c3551f690724b}{00069}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vertex_buffer_layout_a7e1ef819bf5dc21d20bb38d9c6914aa5}{Push<float>}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ m\_Elements.push\_back(\{\ GL\_FLOAT,\ count,\ GL\_FALSE\ \});}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ m\_Stride\ +=\ count\ *\ \mbox{\hyperlink{struct_vertex_buffer_element_a8465417a435f8bcd68a71bc414f1d0ee}{VertexBufferElement::GetSizeOfType}}(GL\_FLOAT);}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00076}\mbox{\hyperlink{class_vertex_buffer_layout_a0ac1e4373209bf1a2c5c3551f690724b}{00076}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vertex_buffer_layout_a7e1ef819bf5dc21d20bb38d9c6914aa5}{Push<unsigned\ int>}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ m\_Elements.push\_back(\{\ GL\_UNSIGNED\_INT,\ count,\ GL\_FALSE\ \});}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ m\_Stride\ +=\ count\ *\ \mbox{\hyperlink{struct_vertex_buffer_element_a8465417a435f8bcd68a71bc414f1d0ee}{VertexBufferElement::GetSizeOfType}}(GL\_UNSIGNED\_INT);}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00083}\mbox{\hyperlink{class_vertex_buffer_layout_a0ac1e4373209bf1a2c5c3551f690724b}{00083}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vertex_buffer_layout_a7e1ef819bf5dc21d20bb38d9c6914aa5}{Push<unsigned\ char>}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ m\_Elements.push\_back(\{\ GL\_UNSIGNED\_BYTE,\ count,\ GL\_TRUE\ \});}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ m\_Stride\ +=\ count\ *\ \mbox{\hyperlink{struct_vertex_buffer_element_a8465417a435f8bcd68a71bc414f1d0ee}{VertexBufferElement::GetSizeOfType}}(GL\_UNSIGNED\_BYTE);}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00089}\mbox{\hyperlink{class_vertex_buffer_layout_afd51206e649bd55f8dbb6a1a46df4517}{00089}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::vector<VertexBufferElement>\ \mbox{\hyperlink{class_vertex_buffer_layout_afd51206e649bd55f8dbb6a1a46df4517}{GetElements}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Elements;\ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00090}\mbox{\hyperlink{class_vertex_buffer_layout_aca33593016f0360720489d25b933ac4a}{00090}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_vertex_buffer_layout_aca33593016f0360720489d25b933ac4a}{GetStride}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Stride;\ \}}
+\DoxyCodeLine{\Hypertarget{_vertex_buffer_layout_8h_source_l00091}00091\ \};}
+
+\end{DoxyCode}

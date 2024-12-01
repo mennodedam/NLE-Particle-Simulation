@@ -1,0 +1,138 @@
+\doxysection{src/\+GLmacros.h File Reference}
+\hypertarget{_g_lmacros_8h}{}\label{_g_lmacros_8h}\index{src/GLmacros.h@{src/GLmacros.h}}
+
+
+Implements the GLmacros class for managing Open\+GL error handling.  
+
+
+{\ttfamily \#include "{}GL/glew.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3}{ASSERT}}(x)~if (!(x)) \+\_\+\+\_\+debugbreak();
+\begin{DoxyCompactList}\small\item\em Asserts a condition and triggers a debug break if the condition is false. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{GLCall}}(x)
+\begin{DoxyCompactList}\small\item\em Calls a specified Open\+GL function after clearing any existing Open\+GL errors, and checks for errors after the call. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193}{Gl\+Clear\+Error}} ()
+\begin{DoxyCompactList}\small\item\em Clears the Open\+GL error buffer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}{Gl\+Log\+Call}} (const char \texorpdfstring{$\ast$}{*}function, const char \texorpdfstring{$\ast$}{*}file, int line)
+\begin{DoxyCompactList}\small\item\em Logs an Open\+GL error. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements the GLmacros class for managing Open\+GL error handling. 
+
+This file includes the functions and macros for handling Open\+GL errors.
+
+For more information, see the documentation at\+: \doxylink{}{https\+://github.\+com/mennodedam/\+NLE-\/\+Particle-\/\+Simulation}
+
+\begin{DoxyDate}{Date}
+1-\/11-\/2024 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Menno Eijkelenboom 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{_g_lmacros_8h_source}{GLmacros.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3}\index{GLmacros.h@{GLmacros.h}!ASSERT@{ASSERT}}
+\index{ASSERT@{ASSERT}!GLmacros.h@{GLmacros.h}}
+\doxysubsubsection{\texorpdfstring{ASSERT}{ASSERT}}
+{\footnotesize\ttfamily \label{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3} 
+\#define ASSERT(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})~if (!(x)) \+\_\+\+\_\+debugbreak();}
+
+
+
+Asserts a condition and triggers a debug break if the condition is false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The condition to check.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This macro uses the {\ttfamily \+\_\+\+\_\+debugbreak()} function, which is platform-\/specific and typically works on Windows. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_lmacros_8h_source_l00025}{25}} of file \mbox{\hyperlink{_g_lmacros_8h_source}{GLmacros.\+h}}.
+
+\Hypertarget{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}\index{GLmacros.h@{GLmacros.h}!GLCall@{GLCall}}
+\index{GLCall@{GLCall}!GLmacros.h@{GLmacros.h}}
+\doxysubsubsection{\texorpdfstring{GLCall}{GLCall}}
+{\footnotesize\ttfamily \label{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548} 
+\#define GLCall(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193}{GlClearError}}();\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ x;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ASSERT(\mbox{\hyperlink{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}{GlLogCall}}(\#x,\ \_\_FILE\_\_,\ \_\_LINE\_\_))}
+
+\end{DoxyCode}
+
+
+Calls a specified Open\+GL function after clearing any existing Open\+GL errors, and checks for errors after the call. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The Open\+GL function to call.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This macro ensures that Open\+GL errors are logged and handled. It requires {\ttfamily \doxylink{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193}{Gl\+Clear\+Error()}} and {\ttfamily \doxylink{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}{Gl\+Log\+Call()}} to be implemented. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_lmacros_8h_source_l00036}{36}} of file \mbox{\hyperlink{_g_lmacros_8h_source}{GLmacros.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193}\index{GLmacros.h@{GLmacros.h}!GlClearError@{GlClearError}}
+\index{GlClearError@{GlClearError}!GLmacros.h@{GLmacros.h}}
+\doxysubsubsection{\texorpdfstring{GlClearError()}{GlClearError()}}
+{\footnotesize\ttfamily \label{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193} 
+void Gl\+Clear\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the Open\+GL error buffer. 
+
+Opengl maintains an error buffer that stores all errors that occur. This function clears that buffer. 
+
+Definition at line \mbox{\hyperlink{_g_lmacros_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{_g_lmacros_8cpp_source}{GLmacros.\+cpp}}.
+
+\Hypertarget{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}\index{GLmacros.h@{GLmacros.h}!GlLogCall@{GlLogCall}}
+\index{GlLogCall@{GlLogCall}!GLmacros.h@{GLmacros.h}}
+\doxysubsubsection{\texorpdfstring{GlLogCall()}{GlLogCall()}}
+{\footnotesize\ttfamily \label{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2} 
+bool Gl\+Log\+Call (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{function}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{int}]{line}{}\end{DoxyParamCaption})}
+
+
+
+Logs an Open\+GL error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The function that caused the error. \\
+\hline
+{\em file} & The file that caused the error. \\
+\hline
+{\em line} & The line that caused the error. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if no errors occurred, {\ttfamily false} otherwise.
+\end{DoxyReturn}
+This function logs an Open\+GL error. 
+
+Definition at line \mbox{\hyperlink{_g_lmacros_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{_g_lmacros_8cpp_source}{GLmacros.\+cpp}}.
+

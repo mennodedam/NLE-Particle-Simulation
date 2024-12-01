@@ -19,6 +19,11 @@
 
  /**
   * @brief Constructs a ParticleSystem instance with an initial particle count of zero.
+  * 
+  * @details
+  * The constructor initializes the particle count to zero and sets the maximum number of particles
+  * that can be created in the system. The freelist is populated with the maximum number of particles
+  * and the IDlist is initialized with the same values.
   */
 ParticleSystem::ParticleSystem()
 {
@@ -26,7 +31,9 @@ ParticleSystem::ParticleSystem()
 
 /**
  * @brief Destructor for ParticleSystem.
- * Deletes all particles created within the system to free memory.
+ * 
+ * @details
+ * Deletes all particles created within the system to free memory. 
  */
 ParticleSystem::~ParticleSystem()
 {
@@ -41,6 +48,11 @@ ParticleSystem::~ParticleSystem()
  * @param m The mass of the particle.
  * @param r The radius of the particle.
  * @param color The color of the particle (glm::vec4).
+ * 
+ * @details
+ * This function creates a new particle with the specified properties and adds it to the particle system.
+ * The particle is assigned a unique identifier and added to the list of particles. The particle count is
+ * updated and the unique identifier is returned.
  */
 size_t ParticleSystem::CreateParticle(
     glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
@@ -70,6 +82,11 @@ size_t ParticleSystem::CreateParticle(
  *
  * @param id The identifier of the particle to destroy.
  * @note This function ensures the specified particle is deleted and removed from the system.
+ * 
+ * @details
+ * This function destroys a particle by its unique identifier. The particle is removed from the list of particles
+ * and the unique identifier is added back to the freelist. The particle count is updated and the unique identifier
+ * is removed from the list of identifiers.
  */
 void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als computeshader wordt gecalled.
 {
@@ -89,6 +106,9 @@ void ParticleSystem::DestroyParticle(unsigned int id)       ///< werkt niet als 
 
 /**
  * @brief print list of id's to the console
+ * 
+ * @details
+ * This function prints the list of unique identifiers to the console.
  */
 void ParticleSystem::PrintIDlist()
 {

@@ -1,3 +1,16 @@
+/**
+ * @file TestTexture2D.cpp
+ * @brief This file contains the texture test class and its methods.
+ *
+ * @details This file contains the implementation of the texture test.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #include "TestTexture2D.h"
 
 #include "Renderer.h"
@@ -6,8 +19,20 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+/**
+ * @brief The test namespace contains the TestTexture2D class and its methods.
+ * 
+ * @details
+ * The test namespace contains the TestTexture2D class and its methods.
+ */
 namespace test {
 
+    /**
+     * @brief This is the constructor of the TestTexture2D class.
+     * 
+     * @details
+     * This constructor initializes the TestTexture2D class.
+     */
     TestTexture2D::TestTexture2D()
         : m_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)), 
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))), 
@@ -45,16 +70,35 @@ namespace test {
         m_Shader->SetUniform1i("u_Texture", 0);
 	}
 
-
+    /**
+     * @brief This is the destructor of the TestTexture2D class.
+     * 
+     * @details
+     * This destructor destroys the TestTexture2D class.
+     */
 	TestTexture2D::~TestTexture2D()
 	{
 	}
 
-
+    /**
+     * @brief This method updates the TestTexture2D class.
+     * 
+     * @param deltaTime The time between the last frame and the current frame.
+     * 
+     * @details
+     * This method updates the TestTexture2D class.
+     * This method is called every frame.
+     */
 	void TestTexture2D::OnUpdate(float deltaTime)
 	{
 	}
 
+    /**
+     * @brief This method renders the TestTexture2D class.
+     * 
+     * @details
+     * This method renders the TestTexture2D class.
+     */
 	void TestTexture2D::OnRender()
 	{
 		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
@@ -84,6 +128,12 @@ namespace test {
         }
 	}
 
+    /**
+     * @brief This method renders the ImGui of the TestTexture2D class.
+     * 
+     * @details
+     * This method renders the ImGui of the TestTexture2D class.
+     */
 	void TestTexture2D::OnImGuiRender()
 	{
         ImGui::SliderFloat3("Translation A", &m_TranslationA.x, 0.0f, 960.0f);

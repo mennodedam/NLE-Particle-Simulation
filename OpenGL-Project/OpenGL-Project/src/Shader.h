@@ -1,3 +1,16 @@
+/**
+ * @file Shader.h
+ * @brief This file contains the Shader class and its methods.
+ *
+ * @details This file contains the shader class and its methods.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <string>
@@ -9,12 +22,31 @@
 
 #include "Particlesystem.h"
 
+/**
+ * @struct ShaderProgramSource
+ * 
+ * @brief Shader program source
+ * 
+ * @details
+ * This struct contains the source code for the vertex and fragment shader
+ */
 struct ShaderProgramSource
 {
 	std::string VertexSource;
 	std::string FragmentSource;
 };
 
+/** 
+ * @class Shader
+ * @brief Shader class
+ * 
+ * @details This class includes the method definitions for creating, binding, and
+ * unbinding shaders within the Shader class.
+ * 
+ * The Shader class is used to create, bind, and unbind shaders.
+ * The class also includes methods for uploading data to the GPU, setting uniforms,
+ * and retrieving data from the GPU.
+ */
 class Shader
 {
 private:

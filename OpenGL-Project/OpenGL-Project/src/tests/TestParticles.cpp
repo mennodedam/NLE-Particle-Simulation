@@ -1,3 +1,16 @@
+/**
+ * @file TestParticles.cpp
+ * @brief This file contains the Particle test class and its methods.
+ *
+ * @details This file contains the implementation of the Particle test.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #include "TestParticles.h"
 
 #include "Renderer.h"
@@ -19,8 +32,20 @@ int memorySize = 0;
 
 ImVec2 mousePos;
 
+/**
+ * @brief The test namespace contains the TestParticles class and its methods.
+ * 
+ * @details
+ * The test namespace contains the TestParticles class and its methods.
+ */
 namespace test {
 
+    /**
+     * @brief This is the constructor of the TestParticles class.
+     * 
+     * @details
+     * This constructor initializes the TestParticles class.
+     */
     TestParticles::TestParticles()
         : m_TimeElapsed(0.0f)
     {
@@ -39,11 +64,26 @@ namespace test {
         memorySize = m_Particlesystem.GetMaxNumber();
     }
 
+    /**
+     * @brief This is the destructor of the TestParticles class.
+     * 
+     * @details
+     * This destructor destroys the TestParticles class.
+     */
     TestParticles::~TestParticles()
     {
         std::cout << "End Particle Test" << std::endl;
     }
 
+    /**
+     * @brief This method updates the TestParticles class.
+     * 
+     * @param deltaTime The time between the last frame and the current frame.
+     * 
+     * @details
+     * This method updates the TestParticles class.
+     * This method is called every frame.
+     */
     void TestParticles::OnUpdate(float deltaTime)
     {
         if (m_Particlesystem.GetParticleCount() != 0)
@@ -53,7 +93,13 @@ namespace test {
             m_TimeElapsed += deltaTime;
         }
     }
-
+    
+    /**
+     * @brief This method renders the TestParticles class.
+     * 
+     * @details
+     * This method renders the TestParticles class.
+     */
     void TestParticles::OnRender()  ///< NOG NIET AF.
     {
         GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
@@ -66,6 +112,12 @@ namespace test {
         }
     }
 
+    /**
+     * @brief This method renders the ImGui of the TestParticles class.
+     * 
+     * @details
+     * This method renders the ImGui of the TestParticles class.
+     */
     void TestParticles::OnImGuiRender()
     {
         ImGui::Text("Particle count: %d", m_Particlesystem.GetParticleCount());

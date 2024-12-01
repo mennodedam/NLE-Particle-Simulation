@@ -1,5 +1,25 @@
+/**
+ * @file Particle.cpp
+ * @brief Implements the Particle class for managing particles in the simulation.
+ *
+ * @details This file includes the method definitions for creating, updating, and
+ * destroying particles within the Particle class.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #include "Particle.h"
 
+/**
+ * @brief Default constructor for the Particle class.
+ * 
+ * @details
+ * This constructor initializes a Particle object with default values.
+ */
 Particle::Particle
 (
     glm::vec3 pos = { 0.0f, 0.0f, 0.0f },
@@ -18,6 +38,12 @@ Particle::Particle
 {
 }
 
+/**
+ * @brief Destructor for the Particle class.
+ * 
+ * @details
+ * This destructor destroys a Particle object.
+ */
 Particle::~Particle()
 {
 

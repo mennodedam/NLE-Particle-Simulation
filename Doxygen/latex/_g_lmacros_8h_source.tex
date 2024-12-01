@@ -1,0 +1,19 @@
+\doxysection{GLmacros.\+h}
+\hypertarget{_g_lmacros_8h_source}{}\label{_g_lmacros_8h_source}\index{src/GLmacros.h@{src/GLmacros.h}}
+\mbox{\hyperlink{_g_lmacros_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00014}00014\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}GL/glew.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00025}\mbox{\hyperlink{_g_lmacros_8h_aca68c0d4ac8df0838e209fb5300f7be3}{00025}}\ \textcolor{preprocessor}{\#define\ ASSERT(x)\ if\ (!(x))\ \_\_debugbreak();}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00036}\mbox{\hyperlink{_g_lmacros_8h_a8cc1e1baeb83f3fa64a4aaa75baf3548}{00036}}\ \textcolor{preprocessor}{\#define\ GLCall(x)\ GlClearError();\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ x;\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ ASSERT(GlLogCall(\#x,\ \_\_FILE\_\_,\ \_\_LINE\_\_))}}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00040}00040\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_lmacros_8h_a1ca58c1791f080d6e2ce2c877022e193}{GlClearError}}();}
+\DoxyCodeLine{\Hypertarget{_g_lmacros_8h_source_l00041}00041\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_g_lmacros_8h_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}{GlLogCall}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ function,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line);}
+
+\end{DoxyCode}

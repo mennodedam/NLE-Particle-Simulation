@@ -1,8 +1,28 @@
+/**
+ * @file vertexbufferlayout.h
+ * @brief This file contains the VertexBufferLayout class and its methods.
+ *
+ * @details this file contains the VertexBufferLayout class and its methods.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #pragma once
 
 #include <vector>
 #include "Renderer.h"
 
+/**
+ * @struct VertexBufferElement
+ * @brief A class that represents a VertexBufferElement
+ * 
+ * @details
+ * This class represents a VertexBufferElement that can be used to store the type, count and normalized value of a VertexBufferElement.
+ */
 struct VertexBufferElement
 {
 	unsigned int type;
@@ -22,6 +42,13 @@ struct VertexBufferElement
 	}
 };
 
+/**
+ * @class VertexBufferLayout
+ * @brief A class that represents a VertexBufferLayout
+ * 
+ * @details
+ * This class represents a VertexBufferLayout that can be used to store VertexBufferElements.
+ */
 class VertexBufferLayout
 {
 private:

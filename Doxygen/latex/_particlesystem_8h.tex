@@ -1,0 +1,39 @@
+\doxysection{src/\+Particlesystem.h File Reference}
+\hypertarget{_particlesystem_8h}{}\label{_particlesystem_8h}\index{src/Particlesystem.h@{src/Particlesystem.h}}
+
+
+Manages particle creation, updating, and destruction in the simulation.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include "{}vendor/glm/glm.\+hpp"{}}\newline
+{\ttfamily \#include "{}Particle.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_particle_system}{Particle\+System}}
+\begin{DoxyCompactList}\small\item\em Manages a system of particles, including creation, updating, and destruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages particle creation, updating, and destruction in the simulation. 
+
+The \doxylink{class_particle_system}{Particle\+System} class allows for creating, updating, and deleting particles with specific properties like position, velocity, and color. It utilizes compute shaders for GPU-\/based particle updates.
+
+For more information, see the documentation at\+: \doxylink{}{https\+://github.\+com/mennodedam/\+NLE-\/\+Particle-\/\+Simulation}
+
+\begin{DoxyDate}{Date}
+1-\/11-\/2024 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Menno Eijkelenboom 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{_particlesystem_8h_source}{Particlesystem.\+h}}.
+

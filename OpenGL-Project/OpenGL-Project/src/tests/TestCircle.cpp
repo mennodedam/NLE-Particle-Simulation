@@ -1,3 +1,16 @@
+/**
+ * @file TestCircle.cpp
+ * @brief This file contains the circle test class and its methods.
+ *
+ * @details This file contains the implementation of the circle test.
+ *
+ * For more information, see the documentation at:
+ * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink
+ *
+ * @date 1-11-2024
+ * @author Menno Eijkelenboom
+ */
+
 #include "TestCircle.h"
 
 #include "Renderer.h"
@@ -8,8 +21,20 @@
 
 #define NUMBER 32
 
+/**
+ * @brief The test namespace contains the Test class and its methods.
+ * 
+ * @details
+ * The test namespace contains the Test class and its methods.
+ */
 namespace test {
 
+    /**
+     * @brief This is the constructor of the TestCircle class.
+     * 
+     * @details
+     * This constructor initializes the TestCircle class.
+     */
     TestCircle::TestCircle()
         : m_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
         m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
@@ -65,16 +90,35 @@ namespace test {
         m_Shader->SetUniform4f("u_Color", m_CircleColor[0], m_CircleColor[1], m_CircleColor[2], m_CircleColor[3]);
     }
 
-
+    /**
+     * @brief This is the destructor of the TestCircle class.
+     * 
+     * @details
+     * This destructor destroys the TestCircle class.
+     */
     TestCircle::~TestCircle()
     {
     }
 
-
+    /**
+     * @brief This method updates the TestCircle class.
+     * 
+     * @param deltaTime The time between the last frame and the current frame.
+     * 
+     * @details
+     * This method updates the TestCircle class.
+     * This method is called every frame.
+     */
     void TestCircle::OnUpdate(float deltaTime)
     {
     }
 
+    /**
+     * @brief This method renders the TestCircle class.
+     * 
+     * @details
+     * This method renders the TestCircle class.
+     */
     void TestCircle::OnRender()
     {
         GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
@@ -93,6 +137,12 @@ namespace test {
         m_Shader->SetUniform4f("u_Color", m_CircleColor[0], m_CircleColor[1], m_CircleColor[2], m_CircleColor[3]);
     }
 
+    /**
+     * @brief This method renders the ImGui of the TestCircle class.
+     * 
+     * @details
+     * This method renders the ImGui of the TestCircle class.
+     */
     void TestCircle::OnImGuiRender()
     {
         ImGui::ColorEdit4("Clear Color", m_CircleColor);

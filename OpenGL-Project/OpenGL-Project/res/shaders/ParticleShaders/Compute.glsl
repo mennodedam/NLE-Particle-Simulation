@@ -34,8 +34,8 @@ layout(std430, binding = 0) buffer DataBuffer
 uniform float deltaTime;
 
 // 960 x 540
-vec3 screenMin = {-300.0, -100.0, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
-vec3 screenMax = {660.0, 400.0, 0.0};
+vec3 screenMin = {-100.0, -100.0, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
+vec3 screenMax = {600.0, 400.0, 0.0};
 
 //uniform vec3 screenMin;  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
 //uniform vec3 screenMax;

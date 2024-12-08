@@ -1,8 +1,8 @@
 /**
- * @file vertexbuffer.cpp
- * @brief This file contains the vertexbuffer class and its methods.
+ * @file VertexBuffer.cpp
+ * @brief This file contains the VertexBuffer class and its methods.
  *
- * @details this file contains the vertexbuffer class and its methods.
+ * @details this file contains the VertexBuffer class and its methods.
  *
  * For more information, see the documentation at:
  * @link https://github.com/mennodedam/NLE-Particle-Simulation @endlink

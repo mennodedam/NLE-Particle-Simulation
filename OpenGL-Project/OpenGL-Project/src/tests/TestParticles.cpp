@@ -62,6 +62,34 @@ namespace test {
         std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
         std::cout << "Maximum amount of particles: " << m_Particlesystem.GetMaxNumber() << std::endl;
         memorySize = m_Particlesystem.GetMaxNumber();
+
+        float positions[] = 
+        {
+           100.0f, 100.0f, 0.0f, 0.0f, //0
+           200.0f, 100.0f, 1.0f, 0.0f, //1
+           200.0f, 200.0f, 1.0f, 1.0f, //2
+           100.0f, 200.0f, 0.0f, 1.0f  //3
+        };
+
+        unsigned int indices[] = 
+        {
+            0, 1, 2,
+            2, 3, 0
+        };
+
+        GLCall(glEnable(GL_BLEND));
+        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA));
+
+        m_VAO = std::make_unique<VertexArray>();
+        m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 4 * 4 * sizeof(float));
+        VertexBufferLayout layout;
+        layout.Push<float>(2);
+        layout.Push<float>(2);
+
+        m_VAO->AddBuffer(*m_VertexBuffer, layout);
+        m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 6);
+
+        m_Shader->Bind();
     }
 
     /**
@@ -108,7 +136,16 @@ namespace test {
         Renderer renderer;
         {
             m_Shader->Bind();
-            //renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);   ///< *m_VAO en *m_IndexBuffer zijn placeholder.
+
+            glm::mat4 view = glm::mat4(1.0f);
+            glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);  
+
+            m_Shader->SetUniformMat4f("view", view);
+            m_Shader->SetUniformMat4f("projection", projection);
+
+            renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);   ///< *m_VAO en *m_IndexBuffer zijn placeholder.
+
+            m_Shader->Unbind();
         }
     }
 

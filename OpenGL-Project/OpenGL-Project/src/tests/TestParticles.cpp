@@ -21,7 +21,7 @@
 
 // temp values.
 glm::vec3 position = { 1.0f, 1.0f, 0.0f };
-glm::vec3 velocity = { 10.0f, 1000.0f, 0.0f };
+glm::vec3 velocity = { 100.0f, 100.0f, 0.0f };
 glm::vec3 accelleration = { 1.0f, 1.0f, 0.0f };
 glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
 float mass = 1.0f;

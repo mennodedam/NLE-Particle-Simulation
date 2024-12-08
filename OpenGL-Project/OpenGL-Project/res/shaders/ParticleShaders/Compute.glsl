@@ -33,8 +33,9 @@ layout(std430, binding = 0) buffer DataBuffer
 
 uniform float deltaTime;
 
-vec3 screenMin = {0.0, 0.0, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
-vec3 screenMax = {800.0, 600.0, 0.0};
+// 960 x 540
+vec3 screenMin = {-300.0, -100.0, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
+vec3 screenMax = {660.0, 400.0, 0.0};
 
 //uniform vec3 screenMin;  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
 //uniform vec3 screenMax;
@@ -58,10 +59,9 @@ void main()
         particles[i].pos.y = clamp(particles[i].pos.y, screenMin.y + particles[i].radius, screenMax.y - particles[i].radius);
     }
 
-//    if (particles[i].pos.z - particles[i].radius < screenMin.z || particles[i].pos.z + particles[i].radius > screenMax.z) 
-//    {
-//        particles[i].vel.z = -particles[i].vel.z; // Invert Z velocity
-//        // Correct position to prevent sticking
-//        particles[i].pos.z = clamp(particles[i].pos.z, screenMin.z + particles[i].radius, screenMax.z - particles[i].radius);
-//    }
+    if (particles[i].pos.z - particles[i].radius < screenMin.z || particles[i].pos.z + particles[i].radius > screenMax.z) 
+    {
+        particles[i].vel.z = -particles[i].vel.z; 
+        particles[i].pos.z = clamp(particles[i].pos.z, screenMin.z + particles[i].radius, screenMax.z - particles[i].radius);
+    }
 }

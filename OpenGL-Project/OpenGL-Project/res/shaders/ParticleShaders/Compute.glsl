@@ -33,10 +33,35 @@ layout(std430, binding = 0) buffer DataBuffer
 
 uniform float deltaTime;
 
+vec3 screenMin = {0.0, 0.0, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
+vec3 screenMax = {800.0, 600.0, 0.0};
+
+//uniform vec3 screenMin;  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
+//uniform vec3 screenMax;
 
 void main() 
 {
     uint i = gl_GlobalInvocationID.x;
+
     particles[i].pos = particles[i].pos + particles[i].vel * deltaTime + ((particles[i].acc * deltaTime * deltaTime)/2) ;
     particles[i].vel = particles[i].acc * deltaTime + particles[i].vel;
+
+    if (particles[i].pos.x - particles[i].radius < screenMin.x || particles[i].pos.x + particles[i].radius > screenMax.x) 
+    {
+        particles[i].vel.x = -particles[i].vel.x; 
+        particles[i].pos.x = clamp(particles[i].pos.x, screenMin.x + particles[i].radius, screenMax.x - particles[i].radius);
+    }
+
+    if (particles[i].pos.y - particles[i].radius < screenMin.y || particles[i].pos.y + particles[i].radius > screenMax.y) 
+    {
+        particles[i].vel.y = -particles[i].vel.y; 
+        particles[i].pos.y = clamp(particles[i].pos.y, screenMin.y + particles[i].radius, screenMax.y - particles[i].radius);
+    }
+
+//    if (particles[i].pos.z - particles[i].radius < screenMin.z || particles[i].pos.z + particles[i].radius > screenMax.z) 
+//    {
+//        particles[i].vel.z = -particles[i].vel.z; // Invert Z velocity
+//        // Correct position to prevent sticking
+//        particles[i].pos.z = clamp(particles[i].pos.z, screenMin.z + particles[i].radius, screenMax.z - particles[i].radius);
+//    }
 }

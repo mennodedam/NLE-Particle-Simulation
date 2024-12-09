@@ -128,7 +128,7 @@ namespace test {
      * @details
      * This method renders the TestParticles class.
      */
-    void TestParticles::OnRender()  ///< NOG NIET AF.
+    void TestParticles::OnRender() 
     {
         GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -143,7 +143,8 @@ namespace test {
             m_Shader->SetUniformMat4f("view", view);
             m_Shader->SetUniformMat4f("projection", projection);
 
-            renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);   ///< *m_VAO en *m_IndexBuffer zijn placeholder.
+            //renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);   ///< *m_VAO en *m_IndexBuffer zijn placeholder.
+            renderer.DrawInstanced(*m_VAO, *m_IndexBuffer, *m_Shader, m_Particlesystem.GetParticleCount());
 
             m_Shader->Unbind();
         }
@@ -164,12 +165,16 @@ namespace test {
         if (ImGui::Button("Create Particle"))
         {
             int freeindex = m_Particlesystem.CreateParticle(position, velocity, accelleration, mass, radius, color);
-            //m_ComputeShader->UploadData(m_Particlesystem);          ///< op dit moment overwrite dit de preallocated memory van initSSBO()
+            
+            ///< op dit moment overwrite dit de preallocated memory van initSSBO()
+            //m_ComputeShader->UploadData(m_Particlesystem);          
 
+            ///< Werkt
             unsigned int NewestID = m_Particlesystem.ReturnVectorSize()-1;
             Particle newParticle = m_Particlesystem.ReturnParticle(NewestID); 
             m_ComputeShader->UploadAddElement(m_Particlesystem, newParticle, NewestID);
 
+            ///< Werkt niet
             //m_ComputeShader->UploadIDlist(m_Particlesystem.IDlistData());     
         }
 

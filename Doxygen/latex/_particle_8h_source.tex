@@ -1,51 +1,51 @@
 \doxysection{Particle.\+h}
-\hypertarget{_particle_8h_source}{}\label{_particle_8h_source}\index{src/Particle.h@{src/Particle.h}}
+\hypertarget{_particle_8h_source}{}\label{_particle_8h_source}\index{OpenGL-\/Project/OpenGL-\/Project/src/Particle.h@{OpenGL-\/Project/OpenGL-\/Project/src/Particle.h}}
 \mbox{\hyperlink{_particle_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00001}00001\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00015}00015\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00016}00016\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00019}00019\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}vendor/glm/glm.hpp"{}}\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00030}\mbox{\hyperlink{class_particle}{00030}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_particle}{Particle}}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00031}00031\ \{}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00032}00032\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{class_particle_a08cec51491467270a163af6ed3d7e319}{Particle}}(glm::vec3\ pos,\ glm::vec3\ vel,\ glm::vec3\ acc,\ \textcolor{keywordtype}{float}\ m,\ \textcolor{keywordtype}{float}\ r,\ glm::vec4\ color,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{class_particle_ad030d0fe7b88cf81744b127c99244ff4}{\string~Particle}}();}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00035}00035\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00036}\mbox{\hyperlink{class_particle_a94ad42899ab8a221b5523251de0c1ea4}{00036}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_particle_a94ad42899ab8a221b5523251de0c1ea4}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ParticleID;\ \}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00037}00037\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00038}00038\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_ParticleID;\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00040}00040\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Radius;\ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Mass;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{float}\ padding1\ =\ 0.0f;\textcolor{comment}{//float\ padding1;\ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00044}00044\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00045}00045\ \ \ \ \ glm::vec3\ m\_Position;\ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{float}\ padding2\ =\ 0.0f;\textcolor{comment}{//float\ padding2;\ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00048}00048\ \ \ \ \ glm::vec3\ m\_Velocity;\ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{float}\ padding3\ =\ 0.0f;\textcolor{comment}{//float\ padding3;}}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00051}00051\ \ \ \ \ glm::vec3\ m\_Acceleration;\ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{float}\ padding4\ =\ 0.0f;\textcolor{comment}{//float\ padding4;\ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00053}00053\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00054}00054\ \ \ \ \ glm::vec3\ m\_PastPosition;\ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{float}\ padding5\ =\ 0.0f;\textcolor{comment}{//float\ padding5;\ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00057}00057\ \ \ \ \ glm::vec3\ m\_PastVelocity;\ \ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{float}\ padding6\ =\ 0.0f;\textcolor{comment}{//float\ padding6;\ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00059}00059\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00060}00060\ \ \ \ \ glm::vec3\ m\_PastAcceleration;\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{float}\ padding7\ =\ 0.0f;\textcolor{comment}{//\ float\ padding7;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00062}00062\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00063}00063\ \ \ \ \ glm::vec4\ m\_ParticleColor;}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00064}00064\ \};}
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00065}00065\ }
-\DoxyCodeLine{\Hypertarget{_particle_8h_source_l00066}00066\ }
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}vendor/glm/glm.hpp"{}}\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_particle}{Particle}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_particle_a08cec51491467270a163af6ed3d7e319}{Particle}}(glm::vec3\ pos,\ glm::vec3\ vel,\ glm::vec3\ acc,\ \textcolor{keywordtype}{float}\ m,\ \textcolor{keywordtype}{float}\ r,\ glm::vec4\ color,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_particle_ad030d0fe7b88cf81744b127c99244ff4}{\string~Particle}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ getID()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ParticleID;\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_ParticleID;\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Radius;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Mass;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ padding1\ =\ 0.0f;\textcolor{comment}{//float\ padding1;\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ glm::vec3\ m\_Position;\ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ padding2\ =\ 0.0f;\textcolor{comment}{//float\ padding2;\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ glm::vec3\ m\_Velocity;\ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ padding3\ =\ 0.0f;\textcolor{comment}{//float\ padding3;}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ glm::vec3\ m\_Acceleration;\ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{float}\ padding4\ =\ 0.0f;\textcolor{comment}{//float\ padding4;\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ glm::vec3\ m\_PastPosition;\ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{float}\ padding5\ =\ 0.0f;\textcolor{comment}{//float\ padding5;\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ glm::vec3\ m\_PastVelocity;\ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{float}\ padding6\ =\ 0.0f;\textcolor{comment}{//float\ padding6;\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ glm::vec3\ m\_PastAcceleration;\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ padding7\ =\ 0.0f;\textcolor{comment}{//\ float\ padding7;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ glm::vec4\ m\_ParticleColor;}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
 
 \end{DoxyCode}

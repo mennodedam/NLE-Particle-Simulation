@@ -1,8 +1,8 @@
-\doxysection{src/\+GLmacros.cpp File Reference}
-\hypertarget{_g_lmacros_8cpp}{}\label{_g_lmacros_8cpp}\index{src/GLmacros.cpp@{src/GLmacros.cpp}}
+\doxysection{Open\+GL-\/\+Project/\+Open\+GL-\/\+Project/src/\+GLmacros.cpp File Reference}
+\hypertarget{_g_lmacros_8cpp}{}\label{_g_lmacros_8cpp}\index{OpenGL-\/Project/OpenGL-\/Project/src/GLmacros.cpp@{OpenGL-\/Project/OpenGL-\/Project/src/GLmacros.cpp}}
 
 
-Implements the Glmacros functions for managing Open\+GL error handling.  
+Implements the GLmacros functions for managing Open\+GL error handling.  
 
 
 {\ttfamily \#include "{}GLmacros.\+h"{}}\newline
@@ -17,7 +17,7 @@ bool \mbox{\hyperlink{_g_lmacros_8cpp_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}{Gl\+Log
 
 
 \doxysubsection{Detailed Description}
-Implements the Glmacros functions for managing Open\+GL error handling. 
+Implements the GLmacros functions for managing Open\+GL error handling. 
 
 This file includes the functions for handling Open\+GL errors.
 
@@ -31,30 +31,22 @@ Menno Eijkelenboom
 \end{DoxyAuthor}
 
 
-Definition in file \mbox{\hyperlink{_g_lmacros_8cpp_source}{GLmacros.\+cpp}}.
-
-
-
 \doxysubsection{Function Documentation}
-\Hypertarget{_g_lmacros_8cpp_a1ca58c1791f080d6e2ce2c877022e193}\index{GLmacros.cpp@{GLmacros.cpp}!GlClearError@{GlClearError}}
+\Hypertarget{_g_lmacros_8cpp_a1ca58c1791f080d6e2ce2c877022e193}\label{_g_lmacros_8cpp_a1ca58c1791f080d6e2ce2c877022e193} 
+\index{GLmacros.cpp@{GLmacros.cpp}!GlClearError@{GlClearError}}
 \index{GlClearError@{GlClearError}!GLmacros.cpp@{GLmacros.cpp}}
 \doxysubsubsection{\texorpdfstring{GlClearError()}{GlClearError()}}
-{\footnotesize\ttfamily \label{_g_lmacros_8cpp_a1ca58c1791f080d6e2ce2c877022e193} 
-void Gl\+Clear\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Gl\+Clear\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Clears the Open\+GL error buffer. 
 
-Opengl maintains an error buffer that stores all errors that occur. This function clears that buffer. 
-
-Definition at line \mbox{\hyperlink{_g_lmacros_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{_g_lmacros_8cpp_source}{GLmacros.\+cpp}}.
-
-\Hypertarget{_g_lmacros_8cpp_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}\index{GLmacros.cpp@{GLmacros.cpp}!GlLogCall@{GlLogCall}}
+Opengl maintains an error buffer that stores all errors that occur. This function clears that buffer. \Hypertarget{_g_lmacros_8cpp_ac4ae1fe7b6f5df8a316743a3fb9dc9f2}\label{_g_lmacros_8cpp_ac4ae1fe7b6f5df8a316743a3fb9dc9f2} 
+\index{GLmacros.cpp@{GLmacros.cpp}!GlLogCall@{GlLogCall}}
 \index{GlLogCall@{GlLogCall}!GLmacros.cpp@{GLmacros.cpp}}
 \doxysubsubsection{\texorpdfstring{GlLogCall()}{GlLogCall()}}
-{\footnotesize\ttfamily \label{_g_lmacros_8cpp_ac4ae1fe7b6f5df8a316743a3fb9dc9f2} 
-bool Gl\+Log\+Call (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{function}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file}{, }\item[{int}]{line}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Gl\+Log\+Call (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{function,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file,  }\item[{int}]{line }\end{DoxyParamCaption})}
 
 
 
@@ -73,6 +65,3 @@ Logs an Open\+GL error.
 {\ttfamily true} if no errors occurred, {\ttfamily false} otherwise.
 \end{DoxyReturn}
 This function logs an Open\+GL error. 
-
-Definition at line \mbox{\hyperlink{_g_lmacros_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{_g_lmacros_8cpp_source}{GLmacros.\+cpp}}.
-

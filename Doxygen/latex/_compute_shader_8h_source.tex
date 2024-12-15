@@ -1,57 +1,57 @@
 \doxysection{Compute\+Shader.\+h}
-\hypertarget{_compute_shader_8h_source}{}\label{_compute_shader_8h_source}\index{src/ComputeShader.h@{src/ComputeShader.h}}
+\hypertarget{_compute_shader_8h_source}{}\label{_compute_shader_8h_source}\index{OpenGL-\/Project/OpenGL-\/Project/src/ComputeShader.h@{OpenGL-\/Project/OpenGL-\/Project/src/ComputeShader.h}}
 \mbox{\hyperlink{_compute_shader_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00001}00001\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00017}00017\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00018}00018\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ <stack>}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00022}00022\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <GL/glew.h>}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}glm/glm.hpp"{}}\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_particlesystem_8h}{Particlesystem.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00027}00027\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00039}\mbox{\hyperlink{class_compute_shader}{00039}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_compute_shader}{ComputeShader}}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00040}00040\ \{}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00041}00041\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00042}00042\ \ \ \ \ std::string\ m\_Filepath;}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_RendererID;}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00045}00045\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00046}00046\ \ \ \ \ std::unordered\_map<std::string,\ int>\ m\_UniformLocationCache;}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00048}00048\ \ \ \ \ GLuint\ m\_SSBO;}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00049}00049\ \ \ \ \ GLuint\ m\_SSBO\_ActiveID;}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00051}00051\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{class_compute_shader_a7e4966ea91e0b987823c5bf6f2ac440e}{ComputeShader}}(\textcolor{keyword}{const}\ std::string\&\ filepath);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00053}00053\ \ \ \ \ \mbox{\hyperlink{class_compute_shader_a6ed5c0cf02fdb926cd25acaf313f3bd1}{\string~ComputeShader}}();}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a00937f828557f51ae0015144be61bef7}{Bind}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_ad9da2fa4834485f645a1b2778006706d}{Unbind}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a7d566f05142258e5cff2d2414fc5563a}{initSSBO}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a46c0cd69708a5a6818220531a6fba88b}{initSSBOActiveIDlist}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a87eaec590e728572602610eb67342192}{UploadIDlist}}(\textcolor{keyword}{const}\ std::vector<unsigned\ int>\&\ idlist);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a642ba56783e81d50c5b1ad28f3cbad7e}{UploadData}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a869fc7cc7369595d748dfef84948e25b}{UploadAddElement}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem,\ \mbox{\hyperlink{class_particle}{Particle}}\&\ newParticle,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ position);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a027f9f7f1a3b7064b0f23893f402e551}{Update}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem,\ \textcolor{keywordtype}{float}\ deltaTime);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_aa09f005c808662fdea98d67ad473573e}{RetrieveData}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00065}00065\ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00066}00066\ \ \ \ \ \textcolor{comment}{//\ Set\ uniforms}}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a8159e29c02ab784a8530d26c25a32ace}{SetUniform1i}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ value);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a16a05bab0306add07bbc6eb135fe3313}{SetUniform1f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ value);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_ae17bb13902fed49fd6195c8581bb9869}{SetUniform4f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ v0,\ \textcolor{keywordtype}{float}\ v1,\ \textcolor{keywordtype}{float}\ f2,\ \textcolor{keywordtype}{float}\ f3);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a15f085470134cb026b4b20bc493fe933}{SetUniformMat4f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat4\&\ matrix);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00071}00071\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00072}00072\ \ \ \ \ std::string\ ReadShaderFile(\textcolor{keyword}{const}\ std::string\&\ filepath);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00073}00073\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CompileShader(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ source);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00074}00074\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CreateShader(\textcolor{keyword}{const}\ std::string\&\ computeshader);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00075}00075\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{int}\ GetUniformLocation(\textcolor{keyword}{const}\ std::string\&\ name);}
-\DoxyCodeLine{\Hypertarget{_compute_shader_8h_source_l00077}00077\ \};}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <GL/glew.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}glm/glm.hpp"{}}\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_particlesystem_8h}{Particlesystem.h}}"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_compute_shader}{ComputeShader}}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ std::string\ m\_Filepath;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_RendererID;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ std::unordered\_map<std::string,\ int>\ m\_UniformLocationCache;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ GLuint\ m\_SSBO;}
+\DoxyCodeLine{00049\ \ \ \ \ GLuint\ m\_SSBO\_ActiveID;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_compute_shader_a7e4966ea91e0b987823c5bf6f2ac440e}{ComputeShader}}(\textcolor{keyword}{const}\ std::string\&\ filepath);}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_compute_shader_a6ed5c0cf02fdb926cd25acaf313f3bd1}{\string~ComputeShader}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a00937f828557f51ae0015144be61bef7}{Bind}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_ad9da2fa4834485f645a1b2778006706d}{Unbind}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a7d566f05142258e5cff2d2414fc5563a}{initSSBO}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a46c0cd69708a5a6818220531a6fba88b}{initSSBOActiveIDlist}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a87eaec590e728572602610eb67342192}{UploadIDlist}}(\textcolor{keyword}{const}\ std::vector<unsigned\ int>\&\ idlist);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a642ba56783e81d50c5b1ad28f3cbad7e}{UploadData}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a869fc7cc7369595d748dfef84948e25b}{UploadAddElement}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem,\ \mbox{\hyperlink{class_particle}{Particle}}\&\ newParticle,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ position);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a027f9f7f1a3b7064b0f23893f402e551}{Update}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem,\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_aa09f005c808662fdea98d67ad473573e}{RetrieveData}}(\mbox{\hyperlink{class_particle_system}{ParticleSystem}}\&\ particlesystem);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ Set\ uniforms}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a8159e29c02ab784a8530d26c25a32ace}{SetUniform1i}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a16a05bab0306add07bbc6eb135fe3313}{SetUniform1f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_ae17bb13902fed49fd6195c8581bb9869}{SetUniform4f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ v0,\ \textcolor{keywordtype}{float}\ v1,\ \textcolor{keywordtype}{float}\ f2,\ \textcolor{keywordtype}{float}\ f3);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_compute_shader_a15f085470134cb026b4b20bc493fe933}{SetUniformMat4f}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat4\&\ matrix);}
+\DoxyCodeLine{00071\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \ \ std::string\ ReadShaderFile(\textcolor{keyword}{const}\ std::string\&\ filepath);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CompileShader(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ source);}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CreateShader(\textcolor{keyword}{const}\ std::string\&\ computeshader);}
+\DoxyCodeLine{00075\ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ GetUniformLocation(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00077\ \};}
 
 \end{DoxyCode}

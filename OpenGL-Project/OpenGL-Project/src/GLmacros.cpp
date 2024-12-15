@@ -1,6 +1,6 @@
 /**
  * @file GLmacros.cpp
- * @brief Implements the Glmacros functions for managing OpenGL error handling.
+ * @brief Implements the GLmacros functions for managing OpenGL error handling.
  *
  * @details This file includes the functions for handling OpenGL errors.
  *

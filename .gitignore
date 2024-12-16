@@ -402,6 +402,7 @@ FodyWeavers.xsd
 #*.lib
 *.dll
 *.html
+*.tex
 *.svg 
 *.css
 *.txt

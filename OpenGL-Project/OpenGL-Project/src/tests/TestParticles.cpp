@@ -24,7 +24,7 @@
 // temp values.
 glm::vec3 position = { 400.0f, 300.0f, 0.0f };
 glm::vec3 velocity = { 10.0f, 10.0f, 0.0f };
-glm::vec3 accelleration = { 0.0f, -100.0f, 0.0f };
+glm::vec3 accelleration = { 0.0f, -2.0f, 0.0f };  //{ 0.0f, -100.0f, 0.0f };
 glm::vec4 color = { 1.0f, 0.0f, 1.0f, 1.0f };
 float mass = 7.0f;
 float radius = 1.0f;
@@ -35,6 +35,7 @@ int memorySize = 0;
 ImVec2 mousePos;
 
 bool flag = 0;
+bool flag_m = 0;
 
 /**
  * @brief The test namespace contains the TestParticles class and its methods.
@@ -66,20 +67,6 @@ namespace test {
         std::cout << "size of Particle class: " << sizeof(Particle) << std::endl;
         std::cout << "Maximum amount of particles: " << m_Particlesystem.GetMaxNumber() << std::endl;
         memorySize = m_Particlesystem.GetMaxNumber();
-
-        //float positions[] = 
-        //{
-        //   100.0f, 100.0f, 0.0f, 0.0f, //0
-        //   200.0f, 100.0f, 1.0f, 0.0f, //1
-        //   200.0f, 200.0f, 1.0f, 1.0f, //2
-        //   100.0f, 200.0f, 0.0f, 1.0f  //3
-        //};
-        //
-        //unsigned int indices[] = 
-        //{
-        //    0, 1, 2,
-        //    2, 3, 0
-        //};
 
         float r = radius;//1.0f;
         float CenterX = 0.0f;
@@ -233,9 +220,21 @@ namespace test {
         }
 
         ImGui::Text("Mouse Clicked at: (%.3f,%.3f)", mousePos.x, mousePos.y);
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        //if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
-            mousePos = ImGui::GetMousePos();
+            if (flag_m)
+            {
+                mousePos = ImGui::GetMousePos();
+
+                ImGuiIO& io = ImGui::GetIO(); // Get ImGui's input/output structure
+                float invertedY = io.DisplaySize.y - mousePos.y;
+
+                glm::vec3 MouseClick = { mousePos.x, invertedY, 0.0 };
+
+                int freeindex = m_Particlesystem.CreateParticle(MouseClick, velocity, accelleration, mass, radius, color);
+                m_ComputeShader->UploadData(m_Particlesystem);
+            }
         }
 
         if (ImGui::Button("Print ID's"))
@@ -253,13 +252,20 @@ namespace test {
             m_ComputeShader->UploadData(m_Particlesystem);                // upload data to gpu.
         }
 
-        ImGui::Text("Total Energy in system: %.3fJ", 999.999f); ///< method maken voor berekenen totale kinetische energie.
+        //ImGui::Text("Total Energy in system: %.3fJ", 999.999f); ///< method maken voor berekenen totale kinetische energie.
 
         if (ImGui::Button("Toggle Particles"))
         {
             if (!flag) { flag = 1; }
             else { flag = 0; }    
         }
+
+        if (ImGui::Button("Toggle mouseclick Particles"))
+        {
+            if (!flag_m) { flag_m = 1; }
+            else { flag_m = 0; }
+        }
+
 
     }
 

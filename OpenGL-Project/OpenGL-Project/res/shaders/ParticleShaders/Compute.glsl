@@ -34,7 +34,7 @@ layout(std430, binding = 0) buffer DataBuffer
 uniform float deltaTime;
 
 // 960 x 540
-vec3 screenMin = {-0.5, -0.5, 0.0};  // Minimum screen bounds (e.g., {0.0, 0.0, 0.0})
+vec3 screenMin = {-0.5, -0.5, 0.0};  // Minimum screen bounds ({0.0, 0.0, 0.0})
 vec3 screenMax = {800.0, 600.0, 0.0};
 
 //vec3 screenMin = {-100.0, -100.0, 0.0};
@@ -85,12 +85,10 @@ void CheckCollionParticlesSimple(uint i)
 
             if (distance < collisionDistance) 
             {
-                // Resolve collision: invert velocities
                 vec3 normal = normalize(diff);
                 particles[i].vel = reflect(particles[i].vel, normal) * frictionP;
                 particles[j].vel = reflect(particles[j].vel, -normal) * frictionP;
 
-                // Separate particles to avoid sticking
                 float overlap = 0.5 * (collisionDistance - distance);
                 particles[i].pos += normal * overlap;
                 particles[j].pos -= normal * overlap;

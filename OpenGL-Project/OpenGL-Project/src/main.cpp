@@ -42,6 +42,10 @@
 #include "tests/TestCircle.h"
 #include "tests/TestParticles.h"
 
+#define WINDOW_SIZE_X 960  //800
+#define WINDOW_SIZE_Y 540  //580
+
+
 int main(void)
 {
     GLFWwindow* window;
@@ -56,7 +60,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_SIZE_X, WINDOW_SIZE_Y, "Particle Simulation", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
